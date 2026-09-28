@@ -13,6 +13,13 @@
 
     <body>
         <header>
+            <nav>
+                <a href="#">Comprar</a>
+                <a href="#">Alugar</a>
+                <a href="#">Vender</a>
+                <a href="#">Descobrir</a>
+                <a href="#">Entrar</a>
+            </nav>
         </header>
 
         <main>
