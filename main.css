@@ -1,3 +1,8 @@
+:root {
+    --cor-primaria: #faebd7;
+    --cor-secundaria:#7a7f83;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -10,7 +15,7 @@ body {
 
     flex-direction: column;
 
-    background-color: antiquewhite;
+    background-color: var(--cor-primaria);
 
     min-height: 100vh;
 }
@@ -18,7 +23,7 @@ body {
 header {
     display: flex;
 
-    background-color: aliceblue;
+    background-color: var(--cor-primaria);
 
     justify-content: space-between;
     align-items: center;
@@ -40,7 +45,7 @@ main {
 footer {
      display: flex;
 
-    background-color: rgb(122, 127, 131);
+    background-color: var(--cor-secundaria);
 
     justify-content: space-between;
     align-items: center;
