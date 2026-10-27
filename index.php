@@ -31,21 +31,23 @@
             <div class="buscar-container">
                 <form class="card-form-pesquisar">
                     <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
-                    <nav>
-                        <button>Comprar</button>
-                        <button>Alugar</button>
-                        <button>Imovél novo</button>
-                    </nav>
+                    <div class=botoes>
+                        <button class="seletor">Comprar</button>
+                        <button class="seletor">Alugar</button>
+                        <button class="seletor">Imovél novo</button>
+                    </div>
+                    
                     <label> Onde deseja morar? </label>
-                        <input type="search">
-                        <!-- <label> Tipo de imóvel </label>
-                        <select>
-                            <option value="#">Casa</option>
-                            <option value="#">Apartamento</option>
-                            <option value="#">Kitnet</option>
-                        </select> -->
+                        <input class="texto" type="search">
 
-                        <input type="submit" value="Buscar">
+                    <label> Tipo de imóvel </label>
+                    <select class="texto"   >
+                        <option value="#">Casa</option>
+                        <option value="#">Apartamento</option>
+                        <option value="#">Kitnet</option>
+                    </select>
+
+                        <input class="buscar" type="submit" value="Buscar">
                 </form>
 
                 <div class="card-pesquisar"></div>
