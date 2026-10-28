@@ -62,7 +62,7 @@
 
         </main>
 
-        <footer>
+        <footer class="rodape">
             <p>Direitos reservados para fulano de tal</p>
         </footer>
     </body>

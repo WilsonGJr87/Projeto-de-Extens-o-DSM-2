@@ -45,7 +45,7 @@ main {
 }
 
 footer {
-     display: flex;
+    display: flex;
 
     background-color: var(--cor-secundaria);
 
