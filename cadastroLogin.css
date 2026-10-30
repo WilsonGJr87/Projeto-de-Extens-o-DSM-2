@@ -1,0 +1,88 @@
+main{
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    font-size: 23px;
+    padding: 2%;
+    background-color: aliceblue;
+    height: 500px;
+    border-radius: 10px;
+    color:#7a7f83;
+    width: 90%;
+    max-width: 700px;
+    min-width: 300px;
+    box-sizing: border-box;
+}
+
+legend{
+    font-weight: bold;
+}
+
+input{
+    font-size: 17px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid rgb(167, 179, 189);
+    outline: none;
+    padding-inline: 2%;
+    color:#5d676e;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 600px;
+}
+
+input:focus{
+    border-color: aqua;
+}
+
+input[type='submit']{
+    font-weight: bold;
+    border-color: transparent;
+    transition-duration: 0.25s;
+    width: 90%;
+}
+
+input[type='submit']:hover{
+    background-color: rgb(129, 255, 255);
+    cursor: pointer;
+    
+}
+
+.mensagemCadLog, .lembre{
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.mensagemSucesso{
+    font-size: 18px;
+}
+
+input[type='checkbox']{
+    width: 14px;
+    margin-inline: 4px;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%;
+    width: 90%;
+}
+
+.cadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
+    width: 90%;
+}

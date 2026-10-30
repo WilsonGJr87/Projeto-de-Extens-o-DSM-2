@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+$emailuser="";
+
+if(isset($_SESSION['email-user'])){
+    $emailuser = $_SESSION['email-user'];
+}
+else{
+    header('Location:login.php');
+    exit;
+}
+
+if (isset ($_POST['lembre'])){
+    setcookie('email',$email,time()+3600);
+}
+
+?>
+
 <!DOCTYPE HTML>
 
 <html lang="pt-br">
