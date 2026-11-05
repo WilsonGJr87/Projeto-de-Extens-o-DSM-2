@@ -82,7 +82,7 @@ if (isset ($_POST['lembre'])){
         </main>
 
         <footer class="rodape">
-            <p>Direitos reservados para fulano de tal</p>
+            <p>© Copyright 2026 Premium Imóveis -</p>
         </footer>
     </body>
 </html>

@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --cor-primaria: #faebd7;
-    --cor-secundaria:#7a7f83;
+    --cor-primaria:#080805;
+    --cor-secundaria:#F9F7F1;
+    --cor-terciaria:#d3940d;
+
+    --cor-botao-1:#eeca2d;
+    --cor-hover-botao-1:#f3bd29;
+
+    --cor-teste: #0F0E09;
+
+    --texto-primaria: #252525;
+    --texto-secundaria: #cacaca;
 }
 
 * {
@@ -37,7 +46,7 @@ header {
 }
 
 header > img {
-    width: 3%;
+    width: 4%;
 }
 
 main {
@@ -47,7 +56,8 @@ main {
 footer {
     display: flex;
 
-    background-color: var(--cor-secundaria);
+    color: #F9F7F1;
+    background-color: var(--cor-primaria);
 
     justify-content: space-between;
     align-items: center;
@@ -56,5 +66,22 @@ footer {
     height: 7%;
 
     padding: 1%;
+
+    border-top: 2px solid var(--cor-terciaria);
+}
+
+nav {
+    display: flex;
+    flex: 1;
+
+    justify-content: flex-end;
+}
+
+nav a {
+    text-decoration: none;
+
+    color: var(--texto-secundaria);
+
+    margin: 1%;
 
 }
