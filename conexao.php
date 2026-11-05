@@ -3,7 +3,7 @@
 $servidor = "localhost"
 $usuario = "root";
 $senha = "";
-$banco = "meu-banco";
+$banco = "premium_imoveis";
 
 try {
     $conexao = new PDO("mysql:host=$servidor;dbname=$banco",$usuario,$senha);
