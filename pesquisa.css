@@ -1,49 +1,215 @@
+/* area principal da pagina */
+
 main {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
-    gap: 20px;
+    padding: 35px 25px;
+    gap: 30px;
+    background-color: var(--cor-teste);
 }
 
-form {
+main h1 {
+    color: var(--cor-secundaria);
+    text-align: center;
+    font-size: 30px;
+}
+
+/* organização do filtro e dos resultados */
+
+.layout-pesquisa {
+    display: grid;
+    grid-template-columns: minmax(280px, 25%) minmax(0, 1fr);
+    gap: 25px;
+    width: 100%;
+    max-width: none;
+    align-items: start;
+}
+
+/* Filtro */
+
+.filtros {
+    background-color: var(--cor-secundaria);
+    border-radius: 12px;
+    padding: 24px;
+    min-width: 0;
+}
+
+.filtros form {
     display: flex;
     flex-direction: column;
-    width: 450px;
-    max-width: 100%;
-    padding: 25px;
-    gap: 10px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-form label {
-    font-weight: 600;
-}
-
-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-form select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-form input[type="submit"] {
+    width: 100%;
+    padding: 5px;
+    gap: 12px;
     background-color: var(--cor-secundaria);
-    color: white;
+}
+
+.filtros label {
+    color: var(--texto-primaria);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.filtros input,
+.filtros select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+    border-color: var(--cor-terciaria);
+}
+
+.filtros input[type="submit"] {
+    background-color: var(--cor-botao-1);
+    color: var(--texto-primaria);
     font-weight: bold;
+    border: none;
     cursor: pointer;
+    margin-top: 12px;
+    transition: .2s;
+}
+
+.filtros input[type="submit"]:hover {
+    background-color: var(--cor-hover-botao-1);
+}
+
+/* Resultados dos imoveis */
+
+.resultados {
+    min-width: 0;
+    color: var(--cor-secundaria);
+}
+
+.resultados h2 {
+    font-size: 22px;
+    margin-top: -25px;
+    margin-bottom: 20px;
+}
+
+/* organização exibição dos imoveis */
+
+.lista-imoveis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    background-color: var(--cor-secundaria);
+    border: 1px solid var(--cor-terciaria);
+    border-radius: 12px;
+    padding: 12px;
+    min-height: 350px;
+}
+
+/* cards dos imoveis */
+
+.card-imovel {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: var(--texto-primaria);
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+    transition: .2s;
+    max-width: 330px;
+    width: 100%;
+    justify-self: center;
+}
+
+.card-imovel:hover {
+    transform: translateY(-4px);
+}
+
+.card-imovel img {
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+}
+
+.card-imovel .informacoes-imovel {
+    padding: 11px;
+}
+
+.informacoes-imovel h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.informacoes-imovel .preco-imovel {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.informacoes-imovel p {
+    font-size: 13px;
+    margin-bottom: 3px;
+    color: var(--texto-primaria);
+}
+
+/* detalhes do imovel */
+
+.detalhes-imovel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
     margin-top: 10px;
 }
 
-form input[type="submit"]:hover {
-    background-color: #62676b;
+.detalhes-imovel p {
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+/* botao do imovel */
+
+.botao-imovel {
+    width: 100%;
+    padding: 9px;
+    margin-top: 8px;
+    background-color: var(--cor-botao-1);
+    color: var(--texto-primaria);
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.botao-imovel:hover {
+    background-color: var(--cor-hover-botao-1);
+}
+
+/* responsividade */
+
+@media (max-width: 850px) {
+    .layout-pesquisa {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-imoveis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    main {
+        padding: 25px 15px;
+    }
+
+    main h1 {
+        font-size: 24px;
+    }
+
+    .lista-imoveis {
+        grid-template-columns: 1fr;
+    }
 }
