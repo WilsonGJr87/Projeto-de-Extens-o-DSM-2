@@ -1,5 +1,10 @@
+<?php
+    // Importa o arquivo responsável pela conexão com o banco de dados
+    require 'conexao.php';
+?>
 
 <?php
+    // Inicializa as variáveis dos filtros vazias
     $cidade="";
     $bairro = "";
     $tipo = "";
@@ -7,8 +12,9 @@
     $banheiros = "";
     $area_min = "";
     $area_max = "";
-
+    // Verifica se o formulário foi enviado pelo método POST tudo certinho
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        // Recebe os valores preenchidos nos filtros (vc se matou pra entender isso)
         $cidade = $_POST["cidade"];
         $bairro = $_POST["bairro"];
         $tipo = $_POST["tipo"];
@@ -17,6 +23,21 @@
         $area_min = $_POST["area_min"];
         $area_max = $_POST["area_max"];
     }
+?>
+
+<?php
+    // Prepara a consulta dos imóveis e tbm suas imagens (aulinha da simone ai)
+    $consulta = $conexao->prepare("SELECT imovel.*, imagem.caminho 
+    FROM imovel LEFT JOIN imagem
+    ON imovel.id_imovel = imagem.id_imovel
+    WHERE imovel.nm_cidade_imovel LIKE :cidade");
+
+    // Define o valor que será utilizado no filtro de cidade e dps executa a consulta
+    $consulta->bindValue(':cidade', '%' . $cidade . '%');
+    $consulta->execute();
+
+    // Guarda os resultados da consulta em um array
+    $imoveis = $consulta->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -177,116 +198,52 @@
                 <section class="resultados">
 
                     <h2>Imóveis encontrados</h2>
-
+                    <!-- Lista onde os cards dos imóveis vao ser mostrados -->
                     <div class="lista-imoveis">
+                        <?php
+                            // Percorre todos os imóveis encontrados no banco de dados (aulinha do ale)
+                            foreach ($imoveis as $imovel) {
+                        ?>
 
-                        <!-- imovel 1 -->
+                        <!-- Div que cria os cards que vao apresentar as informações de um imóvel -->
                         <div class="card-imovel">
 
-                            <img src="imagens/imovel1.jpg" alt="Casa em Praia Grande">
+                            <!-- Exibe a imagem do imóvel -->
+                            <img src="<?php echo $imovel['caminho']; ?>" alt="Imagem do imóvel">
 
+                            <!-- Área que reúne as informações do imóvel -->
                             <div class="informacoes-imovel">
-                                <h3>Casa em Praia Grande</h3>
+                                <h3>
+                                    <?php echo $imovel['nm_tipo_imovel'] . " em " . $imovel['nm_cidade_imovel']; ?>
+                                </h3>
 
-                                <p class="preco-imovel">R$ 450.000,01</p>
+                                <!-- Exibe o bairro e o tipo do imóvel -->
+                                <p><strong>Bairro:</strong> <?php echo $imovel['nm_bairro_imovel']; ?></p>
+                                <p><strong>Tipo:</strong> <?php echo $imovel['nm_tipo_imovel']; ?></p>
 
-                                <p><strong>Bairro:</strong> Ocian</p>
-                                <p><strong>Tipo:</strong> Casa</p>
-
+                                <!-- Organiza os detalhes do imóvel em uma gradezinha -->
                                 <div class="detalhes-imovel">
-                                    <p><strong>Quartos:</strong> 3</p>
-                                    <p><strong>Banheiros:</strong> 2</p>
-                                    <p><strong>Área mínima:</strong> 80m²</p>
-                                    <p><strong>Área máxima:</strong> 120m²</p>
+                                    <p><strong>Quartos:</strong> <?php echo $imovel['qt_quarto_imovel']; ?></p>
+                                    <p><strong>Banheiros:</strong> <?php echo $imovel['qt_banheiro_imovel']; ?></p>
+
+                                    <!-- Exibe as áreas total e contruída -->
+                                    <p><strong>Área total:</strong> <?php echo $imovel['qt_area_total_imovel']; ?>m²</p>
+                                    <p><strong>Área construída:</strong> <?php echo $imovel['qt_area_construida_imovel']; ?>m²</p>
                                 </div>
 
                                 <button class="botao-imovel">Ver imóvel</button>
                             </div>
                         </div>
-
-                        <!-- imovel 2 -->
-                        <div class="card-imovel">
-
-                            <img src="imagens/imovel2.jpg" alt="Apartamento em Santos">
-
-                            <div class="informacoes-imovel">
-                                <h3>Apartamento em Santos</h3>
-
-                                <p class="preco-imovel">R$ 320.000,00</p>
-
-                                <p><strong>Bairro:</strong> Gonzaga</p>
-                                <p><strong>Tipo:</strong> Apartamento</p>
-
-                                <div class="detalhes-imovel">
-                                    <p><strong>Quartos:</strong> 2</p>
-                                    <p><strong>Banheiros:</strong> 1</p>
-                                    <p><strong>Área mínima:</strong> 55m²</p>
-                                    <p><strong>Área máxima:</strong> 70m²</p>
-                                </div>
-
-                                <button class="botao-imovel">Ver imóvel</button>
-                            </div>
-                        </div>
-
-                        <!-- imovel 3 -->
-                        <div class="card-imovel">
-
-                            <img src="imagens/imovel3.jpg" alt="Casa em São Vicente">
-
-                            <div class="informacoes-imovel">
-                                <h3>Casa em São Vicente</h3>
-
-                                <p class="preco-imovel">R$ 580.000,00</p>
-
-                                <p><strong>Bairro:</strong> Itararé</p>
-                                <p><strong>Tipo:</strong> Casa</p>
-
-                                <div class="detalhes-imovel">
-                                    <p><strong>Quartos:</strong> 4</p>
-                                    <p><strong>Banheiros:</strong> 3</p>
-                                    <p><strong>Área mínima:</strong> 110m²</p>
-                                    <p><strong>Área máxima:</strong> 150m²</p>
-                                </div>
-
-                                <button class="botao-imovel">Ver imóvel</button>
-                            </div>
-                        </div>
-
-                        <!-- imovel 4 -->
-                        <div class="card-imovel">
-
-                            <img src="imagens/imovel4.jpg" alt="Apartamento em Praia Grande">
-
-                            <div class="informacoes-imovel">
-                                <h3>Apartamento em Praia Grande</h3>
-
-                                <p class="preco-imovel">R$ 280.000,00</p>
-
-                                <p><strong>Bairro:</strong> Guilhermina</p>
-                                <p><strong>Tipo:</strong> Apartamento</p>
-
-                                <div class="detalhes-imovel">
-                                    <p><strong>Quartos:</strong> 1</p>
-                                    <p><strong>Banheiros:</strong> 1</p>
-                                    <p><strong>Área mínima:</strong> 40m²</p>
-                                    <p><strong>Área máxima:</strong> 50m²</p>
-                                </div>
-
-                                <button class="botao-imovel">Ver imóvel</button>
-                            </div>
-                        </div>
-
+                    <?php
+                        }
+                    ?>
                     </div>
-
                 </section>
-
             </div>
-
         </main>
 
         <footer class="rodape">
             <p>© Copyright 2026 Premium Imóveis -</p>
         </footer>
-
     </body>
 </html>
