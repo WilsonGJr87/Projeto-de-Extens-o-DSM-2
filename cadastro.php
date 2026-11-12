@@ -1,12 +1,61 @@
 <?php
 
-    if(isset($_COOKIE['email'])){
-        $email = $_COOKIE['email'];
-    }
-    else{
-        $email="";
+    $mensagem1 = "";
+    $mensagem2 = "";
+    $email = "";
+    $cpfcnpj = "";
+    $emailExiste = "";
+    $cpfcnpjExiste = "";
+
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+        $nome = trim($_POST['nome']);
+        $cpfcnpj = preg_replace('/\D/', '', $_POST['cpfcnpj']);
+        $telefone = preg_replace('/\D/', '', $_POST['telefone']);
+        $email = trim($_POST['email']);
+        $senha = trim($_POST['senha']);
+
+        $emailExiste = false;
+        if(isset($_POST['email']) && isset($_POST['senha'])){
+            $arquivo = fopen("usuarios.txt", "r");
+            $conteudo = fread($arquivo, filesize("usuarios.txt"));
+            fclose($arquivo);
+
+            $usuarios = explode("\n", $conteudo);
+            array_pop($usuarios); 
+
+                
+                foreach ($usuarios as $user){
+                    $u = explode("|", $user);
+                    if (isset($u) && strtolower($u[3]) === strtolower($email)){
+                        $emailExiste = true;
+                        break;
+                    }
+                    if (isset($u) && $u[1] === $cpfcnpj){
+                        $cpfcnpjExiste = true;
+                        break;
+                    }
+                }
+        }
     }
 
+    if ($emailExiste || $cpfcnpjExiste){
+        if ($emailExiste) {
+            $mensagem1 = "Este email já possui conta cadastrada!";
+        }
+
+        if ($cpfcnpjExiste) {
+            $mensagem2 = "Este CPF/CNPJ já possui conta cadastrada!";
+        }
+
+    } else{
+        $usuario = [$nome, $cpfcnpj, $telefone, $email, $senha];
+        $arquivo = fopen("usuarios.txt", "a");
+        fwrite($arquivo, implode("|", $usuario) . "\n");
+
+        fclose($arquivo);
+        
+        $mensagem = "Conta criada com sucesso!";
+    }
 ?>
 
 
@@ -39,10 +88,24 @@
             <legend>Faça seu cadastro</legend>
             <div class="cadastro">
             <input type="text" name="nome" placeholder="Seu nome" required>
-            <input type="tel" name="telefone" placeholder="Seu telefone" required>
+            <input type="text" name="cpfcnpj" maxlength="18" inputmode="numeric" pattern="[0-9./-]+" placeholder="Seu CPF/CNPJ" required>
+            <input type="tel" name="telefone" maxlength="15" inputmode="tel" placeholder="Seu telefone" required>
             <input type="email" name="email" placeholder="Seu email" required>
             <input type="password" name="senha" placeholder="Sua senha" required>
             </div>
+            <?php 
+                if ($mensagem1 !== ""): ?>
+                    <p class="mensagemSucesso">
+                        <?= ($mensagem1) ?>
+                    </p>
+                <?php endif;
+
+                if ($mensagem2 !== ""): ?>
+                    <p class="mensagemSucesso">
+                        <?= ($mensagem2) ?>
+                    </p>
+                <?php endif;
+                ?>
             <input type="submit" value="Criar Conta">
             <p class="mensagemCadLog">Já possui conta? <a href='login.php'>Faça seu login</a></p>
         </form>
@@ -54,27 +117,3 @@
     </footer>
 </body>
 </html>
-
-<?php
-
-    if($_SERVER['REQUEST_METHOD'] ==="POST"){
-
-        $nome = $_POST['nome'];
-        $telefone = $_POST['telefone'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        
-        try{
-            $usuario = [$nome, $telefone, $email, $senha];
-            $arquivo = fopen("usuarios.txt", "a");
-            fwrite($arquivo, implode("|", $usuario) . "\n");
-
-            fclose($arquivo);
-            
-            $mensagem = "Conta criada com sucesso!";
-        } catch(Exception $e){
-            $mensagem = "Não foi possível criar a conta!";
-        }
-    }
-
-?>
