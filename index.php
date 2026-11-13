@@ -84,8 +84,43 @@
                 <a href="#">Descobrir</a>
                 <a href="#">Ajuda</a>
             </div>
-            <section>
-                <div></div>
+            <section class="inferior">
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                    <div class="whatsapp">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
             </section>
             <div class="copyright"><p>© Copyright 2026 Premium Imóveis -</p></div>
         </footer>
