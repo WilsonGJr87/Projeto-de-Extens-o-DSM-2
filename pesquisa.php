@@ -27,13 +27,39 @@
 
 <?php
     // Prepara a consulta dos imóveis e tbm suas imagens (aulinha da simone ai)
-    $consulta = $conexao->prepare("SELECT imovel.*, imagem.caminho 
+    $consulta = $conexao->prepare("SELECT imovel.*, imagem.caminho
     FROM imovel LEFT JOIN imagem
     ON imovel.id_imovel = imagem.id_imovel
-    WHERE imovel.nm_cidade_imovel LIKE :cidade");
 
-    // Define o valor que será utilizado no filtro de cidade e dps executa a consulta
+    WHERE imovel.nm_cidade_imovel LIKE :cidade
+    AND imovel.nm_bairro_imovel LIKE :bairro
+    AND imovel.nm_tipo_imovel LIKE :tipo
+
+    AND (:quartos_vazio = '' OR imovel.qt_quarto_imovel >= :quartos_valor)
+    AND (:banheiros_vazio = '' OR imovel.qt_banheiro_imovel >= :banheiros_valor)
+
+    AND (:area_min_vazio = '' OR imovel.qt_area_total_imovel >= :area_min_valor)
+    AND (:area_max_vazio = '' OR imovel.qt_area_total_imovel <= :area_max_valor)");
+
+    // Define os valores dos filtros de texto
     $consulta->bindValue(':cidade', '%' . $cidade . '%');
+    $consulta->bindValue(':bairro', '%' . $bairro . '%');
+    $consulta->bindValue(':tipo', '%' . $tipo . '%');
+
+    // Define os valores dos filtros numéricos
+    $consulta->bindValue(':quartos_vazio', $quartos);
+    $consulta->bindValue(':quartos_valor', $quartos);
+
+    $consulta->bindValue(':banheiros_vazio', $banheiros);
+    $consulta->bindValue(':banheiros_valor', $banheiros);
+
+    $consulta->bindValue(':area_min_vazio', $area_min);
+    $consulta->bindValue(':area_min_valor', $area_min);
+
+    $consulta->bindValue(':area_max_vazio', $area_max);
+    $consulta->bindValue(':area_max_valor', $area_max);
+
+    // Executa a consulta no banco de dados
     $consulta->execute();
 
     // Guarda os resultados da consulta em um array
