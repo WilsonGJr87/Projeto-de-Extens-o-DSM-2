@@ -1,4 +1,9 @@
 <?php
+require_once "conexao.php";
+
+$sql = "SELECT * FROM imovel LIMIT 10";
+$resultado = $conexao->query($sql);
+
 // session_start();
 
 // $emailuser="";
@@ -76,13 +81,13 @@
             <h1> Encontre o seu imóvel ideal para o seu estilo de vida! </h1>
             <div class="container-produtos">
             <?php
-                for ($i = 0; $i < 10; $i++) {
+                while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
                     echo '
                         <div class="card-produto">
                             <img class="card-image" src="Imagens/imagem-teste.png">
-                            <label>Apartamento</label>
-                            <label class="preco-texto">R$ 198.700</label>
-                            <label>Av. Pizzaria Freddy Fazbear</label>
+                            <label>'. $imovel['nm_tipo_imovel'] .'</label>
+                            <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
+                            <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
                             <div class="info-prod">
                                 <div class="info"><img src="Imagens/loc.png" class="prod-icon"><label>oi</label></div>
                             </div>
