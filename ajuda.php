@@ -2,6 +2,7 @@
 // Número do WhatsApp: só dígitos, com código do país e DDD (ex.: 55 + 13 + número)
 $wppNum = '5513900000000';
 ?>
+
 <!DOCTYPE HTML>
 
 <html lang="pt-br">
@@ -13,22 +14,22 @@ $wppNum = '5513900000000';
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="ajuda.css">
 
-        <title>Ajuda</title>
-
         <script src="faq.js" defer></script>
+
+        <title>Ajuda</title>
     </head>
 
     <body>
         <header>
 
-            <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3YyL2xvZ28taG9tZXBh/Z2UvbG9nby01LTEucG5n">
+            <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n" alt="Logo">
 
             <nav>
                 <a href="#">Comprar</a>
                 <a href="#">Alugar</a>
                 <a href="#">Vender</a>
                 <a href="#">Descobrir</a>
-                <a href="#">Ajuda</a>
+                <a href="ajuda.php">Ajuda</a>
             </nav>
         </header>
 
@@ -39,7 +40,7 @@ $wppNum = '5513900000000';
                 <p> Encontre respostas para suas dúvidas. </p>
 
                 <form class="card-form-pesquisar">
-                    <input class="texto" type="search" name="q" autocomplete="off" aria-label="Buscar nas perguntas frequentes" placeholder="Digite sua dúvida...">
+                    <input class="texto" id="busca-faq" type="search" name="q" autocomplete="off" aria-label="Buscar nas perguntas frequentes" placeholder="Digite sua dúvida...">
                 </form>
             </div>
 
@@ -48,7 +49,7 @@ $wppNum = '5513900000000';
                 <a class="card-categoria" href="#">Comprar imóvel</a>
                 <a class="card-categoria" href="#">Alugar imóvel</a>
                 <a class="card-categoria" href="#">Vender imóvel</a>
-                <a class="card-categoria" href="#">Financiamento</a>
+                <a class="card-categoria" href="financiamento.php">Financiamento</a>
                 <a class="card-categoria" href="#">Minha conta</a>
                 <a class="card-categoria" href="#">Agendamentos</a>
             </div>
@@ -82,13 +83,59 @@ $wppNum = '5513900000000';
             <div class="card-whatsapp">
                 <h2> Ainda precisa de ajuda? </h2>
                 <p>Nossa equipe está pronta para atender você.</p>
-                <button type="button" class="botao-whatsapp" data-numero="<?php echo htmlspecialchars($wppNum); ?>">Fale pelo WhatsApp</button>
+                <button type="button" class="botao-whatsapp" data-numero="<?= htmlspecialchars($wppNum) ?>">Fale pelo WhatsApp</button>
             </div>
 
         </main>
 
         <footer class="rodape">
-            <p>&copy; <?php echo date('Y'); ?> Todos os direitos reservados.</p>
+            <div class="superior">
+                <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n" alt="Logo">
+                <a href="#">Comprar</a>
+                <a href="#">Alugar</a>
+                <a href="#">Vender</a>
+                <a href="#">Descobrir</a>
+                <a href="ajuda.php">Ajuda</a>
+            </div>
+            <section class="inferior">
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="localizacao">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                    <div class="telefone">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                    <div class="whatsapp">
+                        <p>Blumenau/SC (CRECI: 2962-J)</p>
+                        <p>R. Eng. Rodolfo Ferraz, 255</p>
+                    </div>
+                </div>
+            </section>
+            <div class="copyright"><p>© Copyright 2026 Premium Imóveis -</p></div>
         </footer>
     </body>
 </html>

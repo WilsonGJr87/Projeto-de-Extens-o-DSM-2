@@ -4,12 +4,15 @@
     justify-content: center;
     align-items: center;
 
-    background-color: aqua;
+    background-image: url("Imagens/49-viva-em-bc.png");
+    /* background-color: var(--cor-primaria); */
 
     width: 100%;
     height: 400px;
 
     gap: 1%;
+
+    border-bottom: 2px solid var(--cor-terciaria);
 }
 
 .card-form-pesquisar {
@@ -17,7 +20,7 @@
 
     flex-direction: column;
 
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-secundaria);
 
     border-radius: 10px;
 
@@ -31,7 +34,7 @@
 }
 .card-pesquisar {
 
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-secundaria);
 
     border-radius: 10px;
 
@@ -49,6 +52,8 @@
 
 h1,h3 {
     justify-self: center;
+
+    color: var(--texto-primaria);
 }
 
 h2 {
@@ -61,48 +66,123 @@ h2 {
 
     flex-direction: row;
 
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 
-    background-color: azure;
+    background-color: var(--cor-secundaria);
 
     width: 100%;
 
     padding: 2%;
-    gap: 20px;
+    gap: 5%;
     
 }
 
 .card-produto {
     display: flex;
     
-    background-color: aqua;
+    flex-direction: column;
 
-    width: 355px;
-    height: 240px;
+    background-color: var(--cor-secundaria); /*var(--cor-primaria);*/
+
+    width: 285px;
+    height: 285px;
+
+    border-radius: 10px;
+    
+    padding: 5px 0;
+
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+.card-produto button {
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+}
+
+.card-image {
+    display: flex;
+    width: 100%;
+    height: 50%;
+
+    align-items: start;
 
     border-radius: 10px;
 }
 
+.preco-texto {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.info-prod {
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    flex: 1;
+
+    width: 100%;
+}
+
+.prod-icon {
+
+    display: flex;
+
+    width: 20px;
+    height: 20px;
+}
+
+
+.card-produto button {
+
+    display: flex;
+
+    align-self: center;
+
+    width: 95%;
+    height: 35px;
+}
+
+.info {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;
+    
+    gap: 5%;
+}
+
 .seletor{
+    background-color: var(--cor-secundaria);
     color: black;
-    background-color: aliceblue;
+
     padding: 8px;
     font-size: 14px;
     padding-right: 30px;
     padding-left: 30px;
     font-weight:600;
+
     border: none;
     border-bottom: 2px solid #000;
     cursor: pointer;
 }
 
 .seletor:hover{
-    border-bottom: 2px solid darkmagenta ;
+    color: var(--cor-hover-botao-1);/*darkmagenta*/
+    border-bottom: 2px solid var(--cor-hover-botao-1);/*darkmagenta */
+    transition: .2s linear;
 }
 
 
-label{
+.buscar-container label{
     padding-top: 15px;
 }
 
@@ -117,7 +197,8 @@ label{
 }
 
 .texto:hover{
-    border: 1px solid purple;
+    transition: .2s linear;
+    border: 1px solid var(--cor-hover-botao-1);/*purple*/
 }
 
 select.texto{
@@ -131,30 +212,36 @@ select.texto{
 
 .buscar{
     padding: 8px;
+
     font-size: large;
     border-radius: 16px;
     border: none;
     outline: none;
-    background-color: blueviolet;
+    background-color: var(--cor-botao-1); /*blueviolet*/
     font-weight:500;
+
     color: white;
+
     cursor: pointer;
+
+    transition: .2s linear;
 }
 
 .buscar:hover{
-    background-color: rgb(106, 33, 174);
+    background-color: var(--cor-hover-botao-1);/*rgb(106, 33, 174)*/
 }
 
-.rodape {
-    display: flex;
+hr {
+    width: 100%;
+
+    background-color: var(--cor-terciaria);
+
+    padding: .1%;
+}
+
+h1,h3 {
+    width: 100%;
+    text-align: center;
 
     background-color: var(--cor-secundaria);
-
-    justify-content: space-between;
-    align-items: center;
-
-    width: 100%;
-    height: 7%;
-
-    padding: 1%;
 }

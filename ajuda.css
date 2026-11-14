@@ -1,3 +1,23 @@
+main {
+    width: 100%;
+    max-width: 960px;
+
+    margin: 0 auto;
+    padding: 2rem 1rem;
+
+    color: var(--cor-secundaria);
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-size: large;
+
+    margin: 2rem 0 1rem;
+}
+
 .buscar-container {
     text-align: center;
 }
@@ -5,25 +25,38 @@
 .buscar-container > p {
     margin: .5rem 0 1.5rem;
 
-    color: var(--cor-secundaria);
+    color: var(--texto-secundaria);
 }
 
 .card-form-pesquisar {
+    background-color: var(--cor-secundaria);
+
+    border-radius: 10px;
+
     max-width: 640px;
 
     margin: 0 auto;
+    padding: 1rem;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 .texto {
     width: 100%;
 
-    padding: .9rem 1rem;
+    padding: 8px;
+    padding-left: 11px;
+    font-size: medium;
+    border-radius: 16px;
+    border: none;
+    border: 1px solid #000;
+    outline: none;
+}
 
-    background-color: var(--cor-card);
-    border: 1px solid var(--cor-secundaria);
-    border-radius: 12px;
-
-    font-size: 1rem;
+.texto:hover,
+.texto:focus {
+    transition: .2s linear;
+    border: 1px solid var(--cor-hover-botao-1);
 }
 
 .container-categorias {
@@ -39,25 +72,32 @@
 
     min-height: 3.5rem;
 
+    background-color: var(--cor-secundaria);
+    color: var(--texto-primaria);
+
+    border-radius: 10px;
+    border-bottom: 2px solid var(--cor-terciaria);
+
     padding: 1rem;
 
-    background-color: var(--cor-card);
-    border: 1px solid var(--cor-secundaria);
-    border-radius: 10px;
-
-    color: var(--cor-texto);
+    font-weight: 600;
     text-decoration: none;
-    font-weight: 500;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+    transition: .2s linear;
 }
 
 .card-categoria:hover {
-    background-color: var(--cor-branco);
+    border-bottom-color: var(--cor-hover-botao-1);
+
+    transform: translateY(-2px);
 }
 
 .container-faq > details {
     padding: 1rem 0;
 
-    border-bottom: 1px solid var(--cor-secundaria);
+    border-bottom: 1px solid var(--cor-terciaria);
 }
 
 .container-faq > details > summary {
@@ -65,51 +105,76 @@
 
     cursor: pointer;
     font-weight: 500;
+
+    transition: .2s linear;
+}
+
+.container-faq > details > summary:hover {
+    color: var(--cor-hover-botao-1);
 }
 
 .container-faq > details > p {
     margin-top: .75rem;
 
-    color: var(--cor-secundaria);
+    color: var(--texto-secundaria);
+}
+
+.faq-status {
+    margin-top: 1rem;
+
+    text-align: center;
+    color: var(--texto-secundaria);
 }
 
 .card-whatsapp {
+    background-color: var(--cor-secundaria);
+    color: var(--texto-primaria);
+
+    border-radius: 10px;
+    border-bottom: 2px solid var(--cor-terciaria);
+
     margin-top: 2rem;
+    padding: 1.5rem;
+
+    text-align: center;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.card-whatsapp > h2 {
+    margin-top: 0;
 }
 
 .card-whatsapp > p {
     margin-bottom: 1rem;
 }
 
-.faq-status {
-    margin-top: 1rem;
-
-    color: var(--cor-secundaria);
-    text-align: center;
-}
-
 .botao-whatsapp {
-    display: block;
+    padding: 8px 28px;
 
-    width: 100%;
+    font-size: large;
+    border-radius: 16px;
+    border: none;
+    outline: none;
+    background-color: var(--cor-botao-1);
+    font-weight: 500;
 
-    padding: .9rem;
-
-    background-color: var(--cor-whatsapp);
-    border: 0;
-    border-radius: 8px;
+    color: var(--texto-primaria);
 
     cursor: pointer;
-    font-size: 1rem;
 
-    color: var(--cor-branco);
-    text-align: center;
-    text-decoration: none;
-    font-weight: 600;
+    transition: .2s linear;
 }
 
 .botao-whatsapp:hover {
-    filter: brightness(1.1);
+    background-color: var(--cor-hover-botao-1);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 2px solid var(--cor-botao-1);
+    outline-offset: 3px;
 }
 
 @media (min-width: 480px) {
@@ -119,15 +184,11 @@
 }
 
 @media (min-width: 768px) {
-    .container-categorias {
-        grid-template-columns: repeat(3, 1fr);
+    main {
+        padding: 3rem 1.5rem;
     }
 
-    .botao-whatsapp {
-        display: inline-block;
-
-        width: auto;
-
-        padding: .9rem 2rem;
+    .container-categorias {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

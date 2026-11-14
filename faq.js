@@ -1,5 +1,5 @@
 (() => {
-    const campo = document.querySelector('.texto');
+    const campo = document.getElementById('busca-faq');
     const itens = document.querySelectorAll('.container-faq details');
     const status = document.getElementById('faq-status');
     const botaoWpp = document.querySelector('.botao-whatsapp');
@@ -26,7 +26,9 @@
             });
 
             // 1 resultado: já abre a resposta; busca vazia: fecha tudo
-            itens.forEach(item => { item.open = palavras.length > 0 && visiveis.length === 1 && !item.hidden; });
+            itens.forEach(item => {
+                item.open = palavras.length > 0 && visiveis.length === 1 && !item.hidden;
+            });
 
             if (palavras.length === 0) {
                 status.textContent = '';
@@ -38,6 +40,7 @@
         });
     }
 
+    // Botão em vez de link: o navegador não mostra a URL no canto da tela ao passar o mouse
     if (botaoWpp) {
         botaoWpp.addEventListener('click', () => {
             const mensagem = encodeURIComponent('Olá, preciso de ajuda!');
