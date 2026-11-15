@@ -1,19 +1,15 @@
 <?php
 
-    if(isset($_COOKIE['email'])){
-        $email = $_COOKIE['email'];
-    }
-    else{
-        $email="";
-    }
+    session_start();
 
+    $email = isset($_COOKIE['email']) ? $_COOKIE['email'] : "";
     $mensagem = "";
 
     if($_SERVER['REQUEST_METHOD'] ==="POST"){
         if(isset($_POST['email']) && isset($_POST['senha'])){
             
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
+            $email = trim($_POST['email']);
+            $senha = trim($_POST['senha']);
 
             if(isset($_POST['lembre'])){
                 setcookie('email',$email,time()+3600);
@@ -29,11 +25,13 @@
             foreach($usuarios as $user){
             $u = explode("|", $user);
 
-                if($email==$u[2] && $senha==$u[3]){
+                if (isset($u[3]) && isset($u[4])){
+                    if($email==$u[3] && $senha==$u[4]){
                     session_start();
                     $_SESSION['email-user'] = $email;
                     header('Location:index.php');
                     exit();
+                    }
                 }
             }
             
