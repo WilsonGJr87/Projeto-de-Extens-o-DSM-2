@@ -1,18 +1,21 @@
 <?php
 
+    session_start();
+
     require_once "conexao.php";
 
-// session_start();
+    $sql = "SELECT * FROM imovel LIMIT 10";
+    $resultado = $conexao->query($sql);
 
-// $emailuser="";
+    // $emailuser="";
 
-// if(!empty($_SESSION['email-user'])){
-//     $emailuser = $_SESSION['email-user'];
-// }
-// else{
-//     header('Location: login.php');
-//     exit();
-// }
+    // if(!empty($_SESSION['email-user'])){
+    //     $emailuser = $_SESSION['email-user'];
+    // }
+    // else{
+    //     header('Location: login.php');
+    //     exit();
+    // }
 
 ?>
 
@@ -79,35 +82,51 @@
                 <?php
                     while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
                         $lista = [
-                            $imovel['qt_area_total_imovel'] => "svg/tamanho.svg",
-                            $imovel['qt_quarto_imovel'] => "svg/cama.svg",
-                            $imovel['qt_banheiro_imovel'] => "svg/toilet.svg",
-                            $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
+                            [
+                                "info" => $imovel['qt_area_total_imovel'],
+                                "title" => "área total", 
+                                "icon" => "svg/tamanho.svg",
+                                "unidade" => "m²",
+                            ],
+                            [
+                                "info" => $imovel['qt_quarto_imovel'],
+                                "title" => "quartos", 
+                                "icon" => "svg/cama.svg",
+                                "unidade" => "",
+                            ], 
+                            [
+                                "info" => $imovel['qt_banheiro_imovel'],
+                                "title" => "banheiros", 
+                                "icon" => "svg/toilet.svg",
+                                "unidade" => "",
+                            ],
+                            [
+                                "info" => $imovel['qt_vaga_imovel'],
+                                "title" => "vagas", 
+                                "icon" => "svg/vaga.svg",
+                                "unidade" => "",
+                            ],  
                         ];
                         echo '
-                            <form class="card-produto" action='imovel.php' method='GET'>
+                            <form class="card-produto" action="imovel.php" method="GET">
+                                <input type="hidden" name="id" value="'. $imovel['id_imovel'] .'">
                                 <img class="card-image" src="Imagens/imagem-teste.png">
                                 <label>'. $imovel['nm_tipo_imovel'] .'</label>
                                 <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
                                 <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
                                 <div class="info-prod">';
-                                    $qnt = 0;
+                                    $qnt = 1;
                                     $index = 0;
-                                    foreach($lista as $info => $img) {
-                                        if ($qnt > 3 )
-                                            break;
+                                    foreach($lista as $info) {
                                         if (isset($info))
                                         {
-                                            $qnt++;
-                                            if ($index == 0)
-                                                $info = $info.'m²';
-                                            echo '<div class="info"><img src="'. $img .'" class="prod-icon">
-                                            <label>'. $info .'</label></div>';
+                                            echo '<div class="info"><img src="'. $info['icon'] .'" class="prod-icon">
+                                            <label>'. $info['info'].$info['unidade'] .'</label></div>';
                                         }
                                     }
                         echo    '</div>
                                 <button>contatar</button>
-                            </div>
+                            </form>
                             ';
                     }
                 ?>

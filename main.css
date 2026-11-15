@@ -12,6 +12,8 @@
 
     --texto-primaria: #252525;
     --texto-secundaria: #cacaca;
+    --texto-terciaria: #dbb126;
+    --texto-terciaria-hover: #d3940d;
 }
 
 * {
@@ -96,7 +98,7 @@ nav a, .superior a {
 
 nav a:hover, .superior a:hover {
     text-decoration: underline;
-    color: #d3940d;
+    color: var(--texto-terciaria-hover);
 }
 
 .superior {
