@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+
+    background-color: black;
+
+    flex-direction: row;
+
+    justify-content: space-around;
+    padding: 1%;
+}
+
+.imovel-container {
+    display: flex;
+
+    flex-direction: column;
+
+    background-color: var(--cor-secundaria);
+
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+
+    height: auto;
+
+    padding: 1%;
+
+}
+
+.contato-container {
+
+    background-color: var(--cor-secundaria);
+
+    width: 40%;
+}
+
+.imovel-container hr {
+    width: 100%;
+}
+
+.container-info {
+    display: flex;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+
+    background-color: aliceblue;
+
+    width: 75%;
+
+    gap: 5%;
+}
+
+.info-container {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;
+    
+    gap: 5%;
+}
+
+.prod-icon {
+
+    display: flex;
+
+    width: 20px;
+    height: 20px;
+}
+
+.container-localizacao {
+    background-color: aqua;
+}
+
+.imovel-imagem {
+    width: 90%;
+}

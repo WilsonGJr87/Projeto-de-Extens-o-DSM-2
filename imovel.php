@@ -9,6 +9,52 @@
     $sql = "SELECT * FROM imovel WHERE id_imovel = '$id'";
     $resultado = $conexao->query($sql);
 
+    $imovel = $resultado->fetch(PDO::FETCH_ASSOC);
+
+    $lista = [
+        [
+            "info" => $imovel['qt_area_total_imovel'],
+            "title" => "área total", 
+            "icon" => "svg/tamanho.svg",
+            "unidade" => "m²",
+        ],
+        [
+            "info" => $imovel['qt_quarto_imovel'],
+            "title" => "quartos", 
+            "icon" => "svg/cama.svg",
+            "unidade" => "",
+        ], 
+        [
+            "info" => $imovel['qt_banheiro_imovel'],
+            "title" => "banheiros", 
+            "icon" => "svg/toilet.svg",
+            "unidade" => "",
+        ],
+        [
+            "info" => $imovel['qt_vaga_imovel'],
+            "title" => "vagas", 
+            "icon" => "svg/vaga.svg",
+            "unidade" => "",
+        ],  
+    ];
+
+    $tipo = $imovel['nm_tipo_imovel'];
+    $area = $imovel['qt_area_construida_imovel'];
+    $condicao = $imovel['nm_condicao_imovel'];
+    $logradouro = $imovel['nm_logradouro'];
+
+    $rua = $imovel['nm_rua'];
+    $numero = $imovel['cd_numero_imovel'];
+    $bairro = $imovel['nm_bairro_imovel'];
+    $cidade = $imovel['nm_cidade_imovel'];
+    $estado = $imovel['sg_estado'];
+
+    $cep = $imovel['cd_cep_imovel'];
+    $data = $imovel['dt_construcao_imovel'];
+    $preco = $imovel['vl_preco'];
+
+    $titulo = $rua . ', ' . $numero . ', ' . $bairro . ', ' . $cidade . ', ' . $estado;
+
     // if(!isset($_SESSION['id_cliente'])){    
     //     header('Location: login.php');
     //     exit();
@@ -25,15 +71,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="main.css">
-        <link rel="stylesheet" href="home.css">
+        <link rel="stylesheet" href="imovel.css">
 
-        <title>Home</title>
+        <title><?php echo $titulo; ?></title>
     </head>
 
     <body>
         <header>
 
-            <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n">
+            <img src="Imagens/logo-topo.png">
 
             <nav>
                 <a href="#">Comprar</a>
@@ -44,48 +90,40 @@
             </nav>
         </header>
 
-        <main>
-
-            <?php
-                while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                    $lista = [
-                        $imovel['qt_area_total_imovel'] => "svg/tamanho.svg",
-                        $imovel['qt_quarto_imovel'] => "svg/cama.svg",
-                        $imovel['qt_banheiro_imovel'] => "svg/toilet.svg",
-                        $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
-                    ];
-                    echo '
-                        <div class="card-produto">
-                            <img class="card-image" src="Imagens/imagem-teste.png">
-                            <label>'. $imovel['nm_tipo_imovel'] .'</label>
-                            <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
-                            <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
-                            <div class="info-prod">';
-                                $qnt = 0;
-                                $index = 0;
-                                foreach($lista as $info => $img) {
-                                    if ($qnt > 3 )
-                                        break;
-                                    if (isset($info))
-                                    {
-                                        $qnt++;
-                                        if ($index == 0)
-                                            $info = $info.'m²';
-                                        echo '<div class="info"><img src="'. $img .'" class="prod-icon">
-                                        <label>'. $info .'</label></div>';
-                                    }
+        <main> 
+            <div class="container">
+                <div class="imovel-container">
+                    <h2><?php echo $titulo; ?></h2>
+                    <hr>
+                    <h3><?php echo $bairro . ' - ' . $cidade . ', ' . $estado; ?></h3>
+                    <img class="imovel-image" src="Imagens/imagem-teste.png">
+                    <h3>Características</h3>
+                    <div class="container-info">
+                        <?php
+                            foreach($lista as $categoria) {
+                                if (isset($categoria))
+                                {
+                                    echo '<div class="info-container">
+                                        <p>'. $categoria['title'] .'</p>
+                                        <div class="info">
+                                            <img src="'. $categoria['icon'] .'" class="prod-icon">
+                                            <label>'. $categoria['info'] . $categoria['unidade'] .'</label>
+                                        </div>
+                                    </div>';
                                 }
-                    echo    '</div>
-                            <button>contatar</button>
-                        </div>
-                        ';
-                }
-            ?>
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="contato-container">
+                </div>
+            </div>
+            
         </main>
 
         <footer class="rodape">
             <div class="superior">
-                <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n">
+                <img src="Imagens/logo-rodape.png">
                 <a href="#">Comprar</a>
                 <a href="#">Alugar</a>
                 <a href="#">Vender</a>
@@ -134,3 +172,4 @@
         </footer>
     </body>
 </html>
+
