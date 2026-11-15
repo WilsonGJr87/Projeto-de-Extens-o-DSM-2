@@ -87,7 +87,7 @@ $resultado = $conexao->query($sql);
                             $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
                         ];
                         echo '
-                            <div class="card-produto">
+                            <form class="card-produto" action='imovel.php' method='GET'>
                                 <img class="card-image" src="Imagens/imagem-teste.png">
                                 <label>'. $imovel['nm_tipo_imovel'] .'</label>
                                 <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
