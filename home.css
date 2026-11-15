@@ -1,7 +1,7 @@
 .buscar-container {
     display: flex;
 
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     background-image: url("Imagens/49-viva-em-bc.png");
@@ -30,6 +30,7 @@
     padding: 2%;
     gap: 2%;
 
+    margin: 5%;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; 
 }
 .card-pesquisar {
@@ -51,9 +52,22 @@
 }
 
 h1,h3 {
-    justify-self: center;
+    /* width: 100%; */
+    text-align: center;
 
+    background-color: var(--cor-secundaria);
     color: var(--texto-primaria);
+}
+
+h1 {
+    justify-self: center;
+    padding: 2% 0;
+
+    border-bottom: solid 3px var(--texto-primaria);
+}
+
+h3 {
+    text-align: start;
 }
 
 h2 {
@@ -62,6 +76,22 @@ h2 {
 }
 
 .container-produtos {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background-color: var(--cor-secundaria);
+
+    width: 100%;
+
+    padding: 2%;
+    /* gap: 5%; */
+    
+}
+
+.carrossel-produtos {
     display: flex;
 
     flex-direction: row;
@@ -73,7 +103,6 @@ h2 {
 
     width: 100%;
 
-    padding: 2%;
     gap: 5%;
     
 }
@@ -106,7 +135,20 @@ h2 {
     justify-content: center;
     align-items: center;
 
+    border: none;
+    outline: none;
+    background-color: var(--cor-botao-1);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .2s linear;
     border-radius: 20px;
+}
+
+.card-produto button:hover{
+    background-color: var(--cor-hover-botao-1);/*rgb(106, 33, 174)*/
 }
 
 .card-image {
@@ -240,11 +282,4 @@ hr {
     background-color: var(--cor-terciaria);
 
     padding: .1%;
-}
-
-h1,h3 {
-    width: 100%;
-    text-align: center;
-
-    background-color: var(--cor-secundaria);
 }
