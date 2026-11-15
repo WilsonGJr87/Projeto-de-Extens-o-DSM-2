@@ -1,8 +1,6 @@
 <?php
-require_once "conexao.php";
 
-$sql = "SELECT * FROM imovel LIMIT 10";
-$resultado = $conexao->query($sql);
+    require_once "conexao.php";
 
 // session_start();
 
