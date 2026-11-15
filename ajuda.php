@@ -49,9 +49,7 @@ $wppNum = '5513900000000';
                 <a class="card-categoria" href="#">Comprar imóvel</a>
                 <a class="card-categoria" href="#">Alugar imóvel</a>
                 <a class="card-categoria" href="#">Vender imóvel</a>
-                <a class="card-categoria" href="financiamento.php">Financiamento</a>
-                <a class="card-categoria" href="#">Minha conta</a>
-                <a class="card-categoria" href="#">Agendamentos</a>
+                <a class="card-categoria card-financiamento" href="financiamento.php">Financiamento</a>
             </div>
 
             <h2> Perguntas frequentes </h2>
