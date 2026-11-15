@@ -4,17 +4,17 @@ require_once "conexao.php";
 $sql = "SELECT * FROM imovel LIMIT 10";
 $resultado = $conexao->query($sql);
 
-session_start();
+// session_start();
 
-$emailuser="";
+// $emailuser="";
 
-if(!empty($_SESSION['email-user'])){
-    $emailuser = $_SESSION['email-user'];
-}
-else{
-    header('Location: login.php');
-    exit();
-}
+// if(!empty($_SESSION['email-user'])){
+//     $emailuser = $_SESSION['email-user'];
+// }
+// else{
+//     header('Location: login.php');
+//     exit();
+// }
 
 ?>
 
@@ -35,7 +35,7 @@ else{
     <body>
         <header>
 
-            <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n">
+            <img src="Imagens/logo-topo.png">
 
             <nav>
                 <a href="#">Comprar</a>
@@ -69,53 +69,57 @@ else{
                         <input class="buscar" type="submit" value="Buscar">
                 </form>
 
-                <div class="card-pesquisar"></div>
+                <!-- <div class="card-pesquisar"></div> -->
             </div>
 
-            <h3> Imóveis em destaque </h3>
             <h1> Encontre o seu imóvel ideal para o seu estilo de vida! </h1>
+
+            
             <div class="container-produtos">
-            <?php
-                while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                    $lista = [
-                        $imovel['qt_area_total_imovel'] => "svg/tamanho.svg",
-                        $imovel['qt_quarto_imovel'] => "svg/cama.svg",
-                        $imovel['qt_banheiro_imovel'] => "svg/toilet.svg",
-                        $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
-                    ];
-                    echo '
-                        <div class="card-produto">
-                            <img class="card-image" src="Imagens/imagem-teste.png">
-                            <label>'. $imovel['nm_tipo_imovel'] .'</label>
-                            <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
-                            <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
-                            <div class="info-prod">';
-                                $qnt = 0;
-                                $index = 0;
-                                foreach($lista as $info => $img) {
-                                    if ($qnt > 3 )
-                                        break;
-                                    if (isset($info))
-                                    {
-                                        $qnt++;
-                                        if ($index == 0)
-                                            $info = $info.'m²';
-                                        echo '<div class="info"><img src="'. $img .'" class="prod-icon">
-                                        <label>'. $info .'</label></div>';
+                <h3> Imóveis em destaque </h3>
+                <div class="carrossel-produtos">
+                <?php
+                    while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                        $lista = [
+                            $imovel['qt_area_total_imovel'] => "svg/tamanho.svg",
+                            $imovel['qt_quarto_imovel'] => "svg/cama.svg",
+                            $imovel['qt_banheiro_imovel'] => "svg/toilet.svg",
+                            $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
+                        ];
+                        echo '
+                            <div class="card-produto">
+                                <img class="card-image" src="Imagens/imagem-teste.png">
+                                <label>'. $imovel['nm_tipo_imovel'] .'</label>
+                                <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
+                                <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
+                                <div class="info-prod">';
+                                    $qnt = 0;
+                                    $index = 0;
+                                    foreach($lista as $info => $img) {
+                                        if ($qnt > 3 )
+                                            break;
+                                        if (isset($info))
+                                        {
+                                            $qnt++;
+                                            if ($index == 0)
+                                                $info = $info.'m²';
+                                            echo '<div class="info"><img src="'. $img .'" class="prod-icon">
+                                            <label>'. $info .'</label></div>';
+                                        }
                                     }
-                                }
-                    echo    '</div>
-                            <button>contatar</button>
-                        </div>
-                        ';
-                }
-            ?>
+                        echo    '</div>
+                                <button>contatar</button>
+                            </div>
+                            ';
+                    }
+                ?>
+                </div>
             </div>
         </main>
 
         <footer class="rodape">
             <div class="superior">
-                <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n">
+                <img src="Imagens/logo-rodape.png">
                 <a href="#">Comprar</a>
                 <a href="#">Alugar</a>
                 <a href="#">Vender</a>
