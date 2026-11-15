@@ -1,16 +1,10 @@
 <?php
-session_start();
+    session_start();
 
-$emailuser="";
-
-if(!empty($_SESSION['email-user'])){
-    $emailuser = $_SESSION['email-user'];
-}
-else{
-    header('Location: login.php');
-    exit();
-}
-
+    if(!isset($_SESSION['id_cliente'])){
+        header('Location: login.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE HTML>

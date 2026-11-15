@@ -1,61 +1,60 @@
 <?php
 
+    require_once "conexao.php";
+
+    $mensagem = "";
     $mensagem1 = "";
     $mensagem2 = "";
     $email = "";
     $cpfcnpj = "";
-    $emailExiste = "";
-    $cpfcnpjExiste = "";
+    $emailExiste = false;
+    $cpfcnpjExiste = false;
 
-    if($_SERVER['REQUEST_METHOD'] === "POST"){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome = trim($_POST['nome']);
         $cpfcnpj = preg_replace('/\D/', '', $_POST['cpfcnpj']);
         $telefone = preg_replace('/\D/', '', $_POST['telefone']);
         $email = trim($_POST['email']);
-        $senha = trim($_POST['senha']);
+        $senha = $_POST['senha'];
 
-        $emailExiste = false;
-        if(isset($_POST['email']) && isset($_POST['senha'])){
-            $arquivo = fopen("usuarios.txt", "r");
-            $conteudo = fread($arquivo, filesize("usuarios.txt"));
-            fclose($arquivo);
+        $sql = "SELECT * FROM cliente WHERE nm_email_cliente = :email";
+        $consulta = $conexao->prepare($sql);
+        $consulta->execute([':email' => $email]);
+        $emailExiste = $consulta->fetch() ? true : false;
 
-            $usuarios = explode("\n", $conteudo);
-            array_pop($usuarios); 
+        $sql = "SELECT * FROM cliente WHERE cd_cpf_cnpj_cliente = :cpfcnpj";
+        $consulta = $conexao->prepare($sql);
+        $consulta->execute([':cpfcnpj' => $cpfcnpj]);
+        $cpfcnpjExiste = $consulta->fetch() ? true : false;
 
-                
-                foreach ($usuarios as $user){
-                    $u = explode("|", $user);
-                    if (isset($u) && strtolower($u[3]) === strtolower($email)){
-                        $emailExiste = true;
-                        break;
-                    }
-                    if (isset($u) && $u[1] === $cpfcnpj){
-                        $cpfcnpjExiste = true;
-                        break;
-                    }
-                }
+        if ($emailExiste || $cpfcnpjExiste){
+            if ($emailExiste) {
+                $mensagem1 = "Este email já possui conta cadastrada!";
+            }
+
+            if ($cpfcnpjExiste) {
+                $mensagem2 = "Este CPF/CNPJ já possui conta cadastrada!";
+            }
+
+        } else{
+            $senha = password_hash($senha, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO cliente (nm_cliente, cd_cpf_cnpj_cliente, cd_telefone_cliente, nm_email_cliente, cd_senha_cliente) VALUES (:nome, :cpfcnpj, :telefone, :email, :senha)";
+            
+            $consulta = $conexao->prepare($sql);
+
+            $consulta->execute([
+                ':nome' => $nome,
+                ':cpfcnpj' => $cpfcnpj,
+                ':telefone' => $telefone,
+                ':email' => $email,
+                ':senha' => $senha
+            ]);
+            
+            $mensagem = "Conta criada com sucesso!";
         }
     }
 
-    if ($emailExiste || $cpfcnpjExiste){
-        if ($emailExiste) {
-            $mensagem1 = "Este email já possui conta cadastrada!";
-        }
-
-        if ($cpfcnpjExiste) {
-            $mensagem2 = "Este CPF/CNPJ já possui conta cadastrada!";
-        }
-
-    } else{
-        $usuario = [$nome, $cpfcnpj, $telefone, $email, $senha];
-        $arquivo = fopen("usuarios.txt", "a");
-        fwrite($arquivo, implode("|", $usuario) . "\n");
-
-        fclose($arquivo);
-        
-        $mensagem = "Conta criada com sucesso!";
-    }
 ?>
 
 
@@ -95,13 +94,13 @@
             </div>
             <?php 
                 if ($mensagem1 !== ""): ?>
-                    <p class="mensagemSucesso">
+                    <p class="mensagem">
                         <?= ($mensagem1) ?>
                     </p>
                 <?php endif;
 
                 if ($mensagem2 !== ""): ?>
-                    <p class="mensagemSucesso">
+                    <p class="mensagem">
                         <?= ($mensagem2) ?>
                     </p>
                 <?php endif;
