@@ -56,9 +56,8 @@ $resultado = $conexao->query($sql);
                 <form class="card-form-pesquisar">
                     <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
                     <div class=botoes>
-                        <button class="seletor">Comprar</button>
-                        <button class="seletor">Alugar</button>
-                        <button class="seletor">Imovél novo</button>
+                        <button type="button" id="comprarOPT" class="seletor ativo">Comprar</button>
+                        <button type="button" id="alugarOPT" class="seletor">Alugar</button>
                     </div>
                     
                     <label> Onde deseja morar? </label>
@@ -82,15 +81,34 @@ $resultado = $conexao->query($sql);
             <div class="container-produtos">
             <?php
                 while ($imovel = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                    $lista = [
+                        $imovel['qt_area_total_imovel'] => "svg/tamanho.svg",
+                        $imovel['qt_quarto_imovel'] => "svg/cama.svg",
+                        $imovel['qt_banheiro_imovel'] => "svg/toilet.svg",
+                        $imovel['qt_vaga_imovel'] => "svg/vaga.svg"
+                    ];
                     echo '
                         <div class="card-produto">
                             <img class="card-image" src="Imagens/imagem-teste.png">
                             <label>'. $imovel['nm_tipo_imovel'] .'</label>
                             <label class="preco-texto">R$ '. $imovel['vl_preco'] .'</label>
                             <label>'. $imovel['nm_logradouro'] . ' | ' . $imovel['nm_bairro_imovel'] .'</label>
-                            <div class="info-prod">
-                                <div class="info"><img src="Imagens/loc.png" class="prod-icon"><label>oi</label></div>
-                            </div>
+                            <div class="info-prod">';
+                                $qnt = 0;
+                                $index = 0;
+                                foreach($lista as $info => $img) {
+                                    if ($qnt > 3 )
+                                        break;
+                                    if (isset($info))
+                                    {
+                                        $qnt++;
+                                        if ($index == 0)
+                                            $info = $info.'m²';
+                                        echo '<div class="info"><img src="'. $img .'" class="prod-icon">
+                                        <label>'. $info .'</label></div>';
+                                    }
+                                }
+                    echo    '</div>
                             <button>contatar</button>
                         </div>
                         ';
@@ -149,4 +167,20 @@ $resultado = $conexao->query($sql);
             <div class="copyright"><p>© Copyright 2026 Premium Imóveis -</p></div>
         </footer>
     </body>
+
+    <script>
+        const comprarOpt = document.getElementById("comprarOPT");
+        const alugarOpt = document.getElementById("alugarOPT");
+
+        comprarOpt.addEventListener("click", () => {
+            comprarOpt.classList.add("ativo");
+            alugarOPT.classList.remove("ativo");
+        });
+        alugarOpt.addEventListener("click", () => {
+            alugarOpt.classList.add("ativo");
+            comprarOpt.classList.remove("ativo");
+        });
+
+    </script>
 </html>
+
