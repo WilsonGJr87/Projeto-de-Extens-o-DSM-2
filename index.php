@@ -4,21 +4,21 @@ require_once "conexao.php";
 $sql = "SELECT * FROM imovel LIMIT 10";
 $resultado = $conexao->query($sql);
 
-// session_start();
+session_start();
 
-// $emailuser="";
+$emailuser="";
 
-// if(isset($_SESSION['email-user'])){
-//     $emailuser = $_SESSION['email-user'];
-// }
-// else{
-//     header('Location:login.php');
-//     exit;
-// }
+if(isset($_SESSION['email-user'])){
+    $emailuser = $_SESSION['email-user'];
+}
+else{
+    header('Location:login.php');
+    exit;
+}
 
-// if (isset ($_POST['lembre'])){
-//     setcookie('email',$email,time()+3600);
-// }
+if (isset ($_POST['lembre'])){
+    setcookie('email',$email,time()+3600);
+}
 
 ?>
 
