@@ -7,7 +7,10 @@
     $id = $_GET['id'];
 
     $sql = "SELECT * FROM imovel WHERE id_imovel = '$id'";
+    $sql2 =  "SELECT * FROM imovel WHERE id_imovel != '$id' LIMIT 5";
+
     $resultado = $conexao->query($sql);
+    $resultado2 = $conexao->query($sql2);
 
     $imovel = $resultado->fetch(PDO::FETCH_ASSOC);
 
@@ -49,11 +52,11 @@
     $cidade = $imovel['nm_cidade_imovel'];
     $estado = $imovel['sg_estado'];
 
-    $cep = $imovel['cd_cep_imovel'];
-    $data = $imovel['dt_construcao_imovel'];
+    $descricao = $imovel['ds_imovel'];
     $preco = $imovel['vl_preco'];
 
     $titulo = $rua . ', ' . $numero . ', ' . $bairro . ', ' . $cidade . ', ' . $estado;
+    $link = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($titulo);
 
     // if(!isset($_SESSION['id_cliente'])){    
     //     header('Location: login.php');
@@ -97,16 +100,22 @@
                     <hr>
                     <h3><?php echo $bairro . ' - ' . $cidade . ', ' . $estado; ?></h3>
                     <img class="imovel-image" src="Imagens/imagem-teste.png">
+                    <h3>Descrição</h3>
+                    <label>
+                        <?php 
+                            echo $descricao;
+                        ?> 
+                    </label>
                     <h3>Características</h3>
-                    <div class="container-info">
+                    <div class="container-detalhes">
                         <?php
                             foreach($lista as $categoria) {
                                 if (isset($categoria))
                                 {
-                                    echo '<div class="info-container">
+                                    echo '<div class="detalhes-container">
                                         <p>'. $categoria['title'] .'</p>
-                                        <div class="info">
-                                            <img src="'. $categoria['icon'] .'" class="prod-icon">
+                                        <div class="detalhe">
+                                            <img src="'. $categoria['icon'] .'" class="detalhe-icon">
                                             <label>'. $categoria['info'] . $categoria['unidade'] .'</label>
                                         </div>
                                     </div>';
@@ -114,10 +123,98 @@
                             }
                         ?>
                     </div>
+                    <a href="<?php echo $link; ?>">Ver localização</a>
                 </div>
-                <div class="contato-container">
-                </div>
+
+                <form class="contato-container">
+                    <h2 id="contato-hr">Valor de venda: R$: <?php echo $preco; ?></h3>
+
+                    <h3>TENHO INTERESSE NESSE IMÓVEL</h3>
+                    <input type="hidden" name="id_imovel" value="<?php echo $imovel['id_imovel']; ?>">
+
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required>Olá, tenho interesse neste imóvel.</textarea>
+                    </div>
+
+                    <button class="submit" type="submit">Enviar interesse</button>
+                </form>
+
             </div>
+
+            <hr id="middle">
+
+            <section class="container-produtos">
+                <h3> Imóveis em destaque </h3>
+                <div class="carrossel-produtos">
+                <?php
+                    while ($recomendacao = $resultado2->fetch(PDO::FETCH_ASSOC)) {
+                        $lista = [
+                            [
+                                "info" => $recomendacao['qt_area_total_imovel'],
+                                "title" => "área total", 
+                                "icon" => "svg/tamanho.svg",
+                                "unidade" => "m²",
+                            ],
+                            [
+                                "info" => $recomendacao['qt_quarto_imovel'],
+                                "title" => "quartos", 
+                                "icon" => "svg/cama.svg",
+                                "unidade" => "",
+                            ], 
+                            [
+                                "info" => $recomendacao['qt_banheiro_imovel'],
+                                "title" => "banheiros", 
+                                "icon" => "svg/toilet.svg",
+                                "unidade" => "",
+                            ],
+                            [
+                                "info" => $recomendacao['qt_vaga_imovel'],
+                                "title" => "vagas", 
+                                "icon" => "svg/vaga.svg",
+                                "unidade" => "",
+                            ],  
+                        ];
+                        echo '
+                            <form class="card-produto" action="imovel.php" method="GET">
+                                <input type="hidden" name="id" value="'. $recomendacao['id_imovel'] .'">
+                                <img class="card-image" src="Imagens/imagem-teste.png">
+                                <label>'. $recomendacao['nm_tipo_imovel'] .'</label>
+                                <label class="preco-texto">R$ '. $recomendacao['vl_preco'] .'</label>
+                                <label>'. $recomendacao['nm_logradouro'] . ' | ' . $recomendacao['nm_bairro_imovel'] .'</label>
+                                <div class="info-prod">';
+                                    $qnt = 1;
+                                    $index = 0;
+                                    foreach($lista as $info) {
+                                        if (isset($info))
+                                        {
+                                            echo '<div class="info"><img src="'. $info['icon'] .'" class="prod-icon">
+                                            <label>'. $info['info'].$info['unidade'] .'</label></div>';
+                                        }
+                                    }
+                        echo    '</div>
+                                <button>contatar</button>
+                            </form>
+                            ';
+                    }
+                ?>
+                </div>
+            </section>
             
         </main>
 
@@ -172,4 +269,3 @@
         </footer>
     </body>
 </html>
-
