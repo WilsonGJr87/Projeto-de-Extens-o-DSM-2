@@ -191,6 +191,10 @@ h2 {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.card-produto *:hover {
+    cursor: pointer;
+}
+
 .info {
     display: flex;
 
@@ -282,4 +286,112 @@ hr {
     background-color: var(--cor-terciaria);
 
     padding: .1%;
+}
+
+.contato-container {
+
+    position: fixed;
+    display: none;
+    flex-direction: column;
+
+    justify-content: space-around;
+    align-items: center;
+
+    width: 30%;
+    height: 60%;
+
+    background-color: var(--cor-secundaria);
+
+    border: 2px solid var(--cor-terciaria);
+    transition: all linear .2s;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 1000;
+}
+
+.contato-container.active {
+    display: flex;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+}
+
+textarea {
+    resize: none;
+}
+
+input, textarea {
+
+    border: none;
+
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+input {
+    width: 100%;
+    height: 35px;
+}
+
+textarea {
+    width: 100%;
+    height: 125px;
+
+    padding: 1%;
+}
+
+h2 {
+    color: var(--cor-terciaria);
+}
+
+#contato-hr {
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+.imovel-container a {
+    text-decoration: none;
+
+    font-weight: bold;
+
+    color: var(--texto-terciaria);
+
+    margin: 1%;
+
+}
+
+.imovel-container a:hover {
+    text-decoration: underline;
+    color: var(--texto-terciaria-hover);
+}
+
+.fechar-btn {
+
+    align-self: flex-end;
+    font-size: larger;
+
+    text-align: center;
+
+    width: 5%;
+    height: 5%;
+
+    border-radius: 10px;
+
+    transition: linear .1s;
+}
+
+.fechar-btn:hover {
+    cursor: pointer;
+
+    background-color: rgb(170, 192, 192);
 }

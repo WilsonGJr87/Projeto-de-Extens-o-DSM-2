@@ -217,10 +217,6 @@
     gap: 5%;
 }
 
-textarea {
-    resize: none;
-}
-
 #middle {
     background-color:var(--cor-terciaria);
     width: 75%;
@@ -240,6 +236,10 @@ textarea {
     align-items: center;
 
     width: 80%;
+}
+
+textarea {
+    resize: none;
 }
 
 input, textarea {

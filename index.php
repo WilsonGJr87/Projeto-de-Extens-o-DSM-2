@@ -49,6 +49,32 @@
 
         <main>
 
+            <form id="contatoDiv" class="contato-container" action="#">
+
+                    <div onclick="fecharcontato()" class="fechar-btn">X</div> 
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required>Olá, tenho interesse neste imóvel.</textarea>
+                    </div>
+
+                    <button class="buscar" type="submit">Enviar</button>
+                </form>
+
             <div class="buscar-container">
                 <form class="card-form-pesquisar">
                     <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
@@ -108,7 +134,7 @@
                             ],  
                         ];
                         echo '
-                            <form class="card-produto" action="imovel.php" method="GET">
+                            <form onclick="verimovel(this)" class="card-produto" action="imovel.php" method="GET">
                                 <input type="hidden" name="id" value="'. $imovel['id_imovel'] .'">
                                 <img class="card-image" src="Imagens/imagem-teste.png">
                                 <label>'. $imovel['nm_tipo_imovel'] .'</label>
@@ -125,7 +151,7 @@
                                         }
                                     }
                         echo    '</div>
-                                <button>contatar</button>
+                                <button type="button" onclick="event.stopPropagation(); abrircontato()">contatar</button>
                             </form>
                             ';
                     }
@@ -189,6 +215,8 @@
         const comprarOpt = document.getElementById("comprarOPT");
         const alugarOpt = document.getElementById("alugarOPT");
 
+        const contato = document.getElementById("contatoDiv");
+
         comprarOpt.addEventListener("click", () => {
             comprarOpt.classList.add("ativo");
             alugarOPT.classList.remove("ativo");
@@ -197,6 +225,18 @@
             alugarOpt.classList.add("ativo");
             comprarOpt.classList.remove("ativo");
         });
+
+        function abrircontato() {
+            contato.classList.add("active");
+        }
+
+        function fecharcontato() {
+            contato.classList.remove("active");
+        }
+
+        function verimovel(form) {
+            form.submit();
+        }
 
     </script>
 </html>
