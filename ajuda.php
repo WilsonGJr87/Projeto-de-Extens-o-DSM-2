@@ -88,54 +88,5 @@ $wppNum = '5513900000000';
 
         </main>
 
-        <footer class="rodape">
-            <div class="superior">
-                <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n" alt="Logo">
-                <a href="#">Comprar</a>
-                <a href="#">Alugar</a>
-                <a href="#">Vender</a>
-                <a href="#">Descobrir</a>
-                <a href="ajuda.php">Ajuda</a>
-            </div>
-            <section class="inferior">
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                    <div class="whatsapp">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-            </section>
-            <div class="copyright"><p>© Copyright 2026 Premium Imóveis -</p></div>
-        </footer>
     </body>
 </html>
