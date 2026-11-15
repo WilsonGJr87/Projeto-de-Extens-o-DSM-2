@@ -1,4 +1,3 @@
-// Botão de WhatsApp: abre a conversa já com a simulação na mensagem
 const botaoWpp = document.querySelector('.botao-whatsapp');
 
 if (botaoWpp) {
