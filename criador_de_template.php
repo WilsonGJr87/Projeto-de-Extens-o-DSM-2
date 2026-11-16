@@ -6,10 +6,10 @@ function mostrar_header() {
         <img src="Imagens/logo.png" alt="Premium Imóveis">
 
         <nav>
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
+            <a href="pesquisa.php?finalidade=comprar">Comprar</a>
+            <a href="pesquisa.php?finalidade=alugar">Alugar</a>
             <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
+            <a href="pesquisa.php">Descobrir</a>
             <a href="ajuda.php">Ajuda</a>
         </nav>
     </header>
@@ -24,10 +24,10 @@ function mostrar_footer() {
 
             <img src="Imagens/logo.png" alt="Premium Imóveis">
 
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
+            <a href="pesquisa.php?finalidade=comprar">Comprar</a>
+            <a href="pesquisa.php?finalidade=alugar">Alugar</a>
             <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
+            <a href="pesquisa.php">Descobrir</a>
             <a href="ajuda.php">Ajuda</a>
 
         </div>
