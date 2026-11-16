@@ -6,7 +6,7 @@ function e($valor) {
     return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
 }
 
-$wppNum = '5513900000000';
+$wppNum = '5513997757680';
 ?>
 
 <!DOCTYPE HTML>
@@ -28,18 +28,25 @@ $wppNum = '5513900000000';
     <body>
         <?php mostrar_header(); ?>
 
+        <!-- Busca nas perguntas frequentes -->
+        <section class="buscar-container">
+
+            <form class="card-form-pesquisar">
+
+                <h1>Como podemos ajudar?</h1>
+
+                <p>Encontre respostas para suas dúvidas.</p>
+
+                <input class="texto" id="busca-faq" type="search" name="q" autocomplete="off" aria-label="Buscar nas perguntas frequentes" placeholder="Digite sua dúvida...">
+
+            </form>
+
+        </section>
+
         <main>
 
-            <div class="buscar-container">
-                <h1> Como podemos ajudar? </h1>
-                <p> Encontre respostas para suas dúvidas. </p>
+            <h2>Escolha um assunto</h2>
 
-                <form class="card-form-pesquisar">
-                    <input class="texto" id="busca-faq" type="search" name="q" autocomplete="off" aria-label="Buscar nas perguntas frequentes" placeholder="Digite sua dúvida...">
-                </form>
-            </div>
-
-            <h2> Escolha um assunto </h2>
             <div class="container-categorias">
                 <a class="card-categoria" href="#">Comprar imóvel</a>
                 <a class="card-categoria" href="#">Alugar imóvel</a>
@@ -47,7 +54,7 @@ $wppNum = '5513900000000';
                 <a class="card-categoria card-financiamento" href="financiamento.php">Financiamento</a>
             </div>
 
-            <h2> Perguntas frequentes </h2>
+            <h2>Perguntas frequentes</h2>
 
             <div class="container-faq">
                 <details>
@@ -74,12 +81,13 @@ $wppNum = '5513900000000';
             <p class="faq-status" id="faq-status" role="status" aria-live="polite"></p>
 
             <div class="card-whatsapp">
-                <h2> Ainda precisa de ajuda? </h2>
+                <h2>Ainda precisa de ajuda?</h2>
                 <p>Nossa equipe está pronta para atender você.</p>
-                <button type="button" class="botao-whatsapp" data-numero="<?= htmlspecialchars($wppNum) ?>">Fale pelo WhatsApp</button>
+                <button type="button" class="botao-whatsapp" data-numero="<?= e($wppNum) ?>">Fale pelo WhatsApp</button>
             </div>
 
         </main>
+
         <?php mostrar_footer(); ?>
     </body>
 </html>
