@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -11,8 +12,15 @@ if (!$id) {
     exit();
 }
 
-// Busca o imóvel solicitado
-$sql = "SELECT * FROM imovel WHERE id_imovel = :id";
+// Busca o imóvel solicitado e sua imagem
+$sql = "SELECT imovel.*,
+        (SELECT caminho
+         FROM imagem
+         WHERE imagem.id_imovel = imovel.id_imovel
+         LIMIT 1) AS caminho_imagem
+        FROM imovel
+        WHERE id_imovel = :id";
+
 $stmt = $conexao->prepare($sql);
 $stmt->execute(['id' => $id]);
 
@@ -24,7 +32,15 @@ if (!$imovel) {
 }
 
 // Busca outros imóveis para recomendação
-$sql2 = "SELECT * FROM imovel WHERE id_imovel != :id LIMIT 5";
+$sql2 = "SELECT imovel.*,
+         (SELECT caminho
+          FROM imagem
+          WHERE imagem.id_imovel = imovel.id_imovel
+          LIMIT 1) AS caminho_imagem
+         FROM imovel
+         WHERE imovel.id_imovel != :id
+         LIMIT 10";
+
 $stmt2 = $conexao->prepare($sql2);
 $stmt2->execute(['id' => $id]);
 
@@ -57,6 +73,8 @@ $preco = $imovel['vl_preco'];
 $titulo = $rua . ', ' . $numero . ', ' . $bairro . ', ' . $cidade . ', ' . $estado;
 
 $link = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($titulo);
+
+$imagem = !empty($imovel['caminho_imagem']) ? $imovel['caminho_imagem'] : "Imagens/imagem-teste.png";
 
 function e($valor) {
     return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
@@ -128,7 +146,7 @@ function e($valor) {
 
                 <h3><?= e($bairro . ' - ' . $cidade . ', ' . $estado) ?></h3>
 
-                <img class="imovel-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
+                <img class="imovel-image" src="<?= e($imagem) ?>" alt="Imagem do imóvel">
 
                 <h3>Descrição</h3>
 
@@ -162,7 +180,7 @@ function e($valor) {
             <!-- Formulário lateral -->
             <form class="contato-sidebar" action="#" method="POST">
 
-                <h2 id="contato-hr">Valor de venda: R$ <?= e($preco) ?></h2>
+                <h2 id="contato-hr">Valor de venda: R$ <?= number_format((float) $preco, 2, ',', '.') ?></h2>
 
                 <h3>Tenho interesse nesse imóvel</h3>
 
@@ -212,17 +230,19 @@ function e($valor) {
                         ["info" => $recomendacao['qt_banheiro_imovel'], "title" => "banheiros", "icon" => "svg/toilet.svg", "unidade" => ""],
                         ["info" => $recomendacao['qt_vaga_imovel'], "title" => "vagas", "icon" => "svg/vaga.svg", "unidade" => ""]
                     ];
+
+                    $imagemRecomendacao = !empty($recomendacao['caminho_imagem']) ? $recomendacao['caminho_imagem'] : "Imagens/imagem-teste.png";
                     ?>
 
                     <form class="card-produto" action="imovel.php" method="GET" onclick="verimovel(this)">
 
                         <input type="hidden" name="id" value="<?= e($recomendacao['id_imovel']) ?>">
 
-                        <img class="card-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
+                        <img class="card-image" src="<?= e($imagemRecomendacao) ?>" alt="Imagem do imóvel">
 
                         <label><?= e($recomendacao['nm_tipo_imovel']) ?></label>
 
-                        <label class="preco-texto">R$ <?= e($recomendacao['vl_preco']) ?></label>
+                        <label class="preco-texto">R$ <?= number_format((float) $recomendacao['vl_preco'], 2, ',', '.') ?></label>
 
                         <label><?= e($recomendacao['nm_logradouro']) ?> | <?= e($recomendacao['nm_bairro_imovel']) ?></label>
 

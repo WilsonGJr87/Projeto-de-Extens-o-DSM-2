@@ -4,7 +4,13 @@ session_start();
 require_once "conexao.php";
 require_once "criador_de_template.php";
 
-$sql = "SELECT * FROM imovel LIMIT 10";
+$sql = "SELECT *,
+        (SELECT caminho
+         FROM imagem
+         WHERE imagem.id_imovel = imovel.id_imovel
+         LIMIT 1) AS caminho_imagem
+        FROM imovel
+        LIMIT 10";
 $resultado = $conexao->query($sql);
 
 function e($valor) {
@@ -120,11 +126,11 @@ $opt = "comprar";
 
                         <input type="hidden" name="id" value="<?= e($imovel['id_imovel']) ?>">
 
-                        <img class="card-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
+                        <img class="card-image" src="<?= e($imovel['caminho_imagem'] ?? 'Imagens/imagem-teste.png') ?>" alt="Imagem do imóvel">
 
                         <label><?= e($imovel['nm_tipo_imovel']) ?></label>
 
-                        <label class="preco-texto">R$ <?= e($imovel['vl_preco']) ?></label>
+                        <label class="preco-texto">R$ <?= number_format((float) $imovel['vl_preco'], 2, ',', '.') ?></label>
 
                         <label><?= e($imovel['nm_logradouro']) ?> | <?= e($imovel['nm_bairro_imovel']) ?></label>
 

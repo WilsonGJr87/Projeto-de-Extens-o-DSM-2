@@ -1,3 +1,4 @@
+
 <?php
     // Importa o arquivo responsável pela conexão com o banco de dados
     require_once 'conexao.php';
@@ -10,7 +11,7 @@
 
 <?php
     // Inicializa as variáveis dos filtros vazias
-    $cidade="";
+    $cidade = "";
     $bairro = "";
     $tipo = "";
     $quartos = "";
@@ -19,24 +20,28 @@
     $area_max = "";
 
     $finalidade = $_GET['finalidade'] ?? "";
-    // Verifica se o formulário foi enviado pelo método POST tudo certinho
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        // Recebe os valores preenchidos nos filtros (vc se matou pra entender isso)
-        $cidade = $_POST["cidade"];
-        $bairro = $_POST["bairro"];
-        $tipo = $_POST["tipo"];
-        $quartos = $_POST["quartos"];
-        $banheiros = $_POST["banheiros"];
-        $area_min = $_POST["area_min"];
-        $area_max = $_POST["area_max"];
+
+    // Verifica se o formulário foi enviado pelo método POST
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Recebe os valores preenchidos nos filtros
+        $cidade = $_POST["cidade"] ?? "";
+        $bairro = $_POST["bairro"] ?? "";
+        $tipo = $_POST["tipo"] ?? "";
+        $quartos = $_POST["quartos"] ?? "";
+        $banheiros = $_POST["banheiros"] ?? "";
+        $area_min = $_POST["area_min"] ?? "";
+        $area_max = $_POST["area_max"] ?? "";
     }
 ?>
 
 <?php
-    // Prepara a consulta dos imóveis e tbm suas imagens (aulinha da simone ai)
-    $consulta = $conexao->prepare("SELECT imovel.*, imagem.caminho
-    FROM imovel LEFT JOIN imagem
-    ON imovel.id_imovel = imagem.id_imovel
+    // Prepara a consulta dos imóveis e também suas imagens
+    $consulta = $conexao->prepare("SELECT imovel.*,
+    (SELECT caminho
+     FROM imagem
+     WHERE imagem.id_imovel = imovel.id_imovel
+     LIMIT 1) AS caminho
+    FROM imovel
 
     WHERE imovel.nm_cidade_imovel LIKE :cidade
     AND imovel.nm_bairro_imovel LIKE :bairro
@@ -142,115 +147,47 @@
 
                         <label>Cidade:</label>
                         <?php
-                            echo '<input type="text" name="cidade" value="' . $cidade . '">';
+                            echo '<input type="text" name="cidade" value="' . e($cidade) . '">';
                         ?>
 
                         <label>Bairro:</label>
                         <?php
-                            echo '<input type="text" name="bairro" value="' . $bairro . '">';
+                            echo '<input type="text" name="bairro" value="' . e($bairro) . '">';
                         ?>
 
                         <label>Tipo de imóvel:</label>
                         <select name="tipo">
-                            <?php
-                                if ($tipo == "") {
-                                    echo '<option value="" selected>Todos</option>';
-                                } else {
-                                    echo '<option value="">Todos</option>';
-                                }
-
-                                if ($tipo == "Casa") {
-                                    echo '<option value="Casa" selected>Casa</option>';
-                                } else {
-                                    echo '<option value="Casa">Casa</option>';
-                                }
-
-                                if ($tipo == "Apartamento") {
-                                    echo '<option value="Apartamento" selected>Apartamento</option>';
-                                } else {
-                                    echo '<option value="Apartamento">Apartamento</option>';
-                                }
-
-                                if ($tipo == "Kitnet") {
-                                    echo '<option value="Kitnet" selected>Kitnet</option>';
-                                } else {
-                                    echo '<option value="Kitnet">Kitnet</option>';
-                                }
-                            ?>
+                            <option value="" <?= $tipo == "" ? 'selected' : '' ?>>Todos</option>
+                            <option value="Casa" <?= $tipo == "Casa" ? 'selected' : '' ?>>Casa</option>
+                            <option value="Apartamento" <?= $tipo == "Apartamento" ? 'selected' : '' ?>>Apartamento</option>
+                            <option value="Kitnet" <?= $tipo == "Kitnet" ? 'selected' : '' ?>>Kitnet</option>
                         </select>
 
                         <label>Quantidade de quartos:</label>
                         <select name="quartos">
-                            <?php
-                                if ($quartos == "") {
-                                    echo '<option value="" selected>Qualquer quantidade</option>';
-                                } else {
-                                    echo '<option value="">Qualquer quantidade</option>';
-                                }
-
-                                if ($quartos == "1") {
-                                    echo '<option value="1" selected>1 ou mais</option>';
-                                } else {
-                                    echo '<option value="1">1 ou mais</option>';
-                                }
-
-                                if ($quartos == "2") {
-                                    echo '<option value="2" selected>2 ou mais</option>';
-                                } else {
-                                    echo '<option value="2">2 ou mais</option>';
-                                }
-
-                                if ($quartos == "3") {
-                                    echo '<option value="3" selected>3 ou mais</option>';
-                                } else {
-                                    echo '<option value="3">3 ou mais</option>';
-                                }
-
-                                if ($quartos == "4") {
-                                    echo '<option value="4" selected>4 ou mais</option>';
-                                } else {
-                                    echo '<option value="4">4 ou mais</option>';
-                                }
-                            ?>
+                            <option value="" <?= $quartos == "" ? 'selected' : '' ?>>Qualquer quantidade</option>
+                            <option value="1" <?= $quartos == "1" ? 'selected' : '' ?>>1 ou mais</option>
+                            <option value="2" <?= $quartos == "2" ? 'selected' : '' ?>>2 ou mais</option>
+                            <option value="3" <?= $quartos == "3" ? 'selected' : '' ?>>3 ou mais</option>
+                            <option value="4" <?= $quartos == "4" ? 'selected' : '' ?>>4 ou mais</option>
                         </select>
 
                         <label>Quantidade de banheiros:</label>
                         <select name="banheiros">
-                            <?php
-                                if ($banheiros == "") {
-                                    echo '<option value="" selected>Qualquer quantidade</option>';
-                                } else {
-                                    echo '<option value="">Qualquer quantidade</option>';
-                                }
-
-                                if ($banheiros == "1") {
-                                    echo '<option value="1" selected>1 ou mais</option>';
-                                } else {
-                                    echo '<option value="1">1 ou mais</option>';
-                                }
-
-                                if ($banheiros == "2") {
-                                    echo '<option value="2" selected>2 ou mais</option>';
-                                } else {
-                                    echo '<option value="2">2 ou mais</option>';
-                                }
-
-                                if ($banheiros == "3") {
-                                    echo '<option value="3" selected>3 ou mais</option>';
-                                } else {
-                                    echo '<option value="3">3 ou mais</option>';
-                                }
-                            ?>
+                            <option value="" <?= $banheiros == "" ? 'selected' : '' ?>>Qualquer quantidade</option>
+                            <option value="1" <?= $banheiros == "1" ? 'selected' : '' ?>>1 ou mais</option>
+                            <option value="2" <?= $banheiros == "2" ? 'selected' : '' ?>>2 ou mais</option>
+                            <option value="3" <?= $banheiros == "3" ? 'selected' : '' ?>>3 ou mais</option>
                         </select>
 
                         <label>Área mínima (m²):</label>
                         <?php
-                            echo '<input type="number" name="area_min" value="' . $area_min . '">';
+                            echo '<input type="number" name="area_min" value="' . e($area_min) . '">';
                         ?>
 
                         <label>Área máxima (m²):</label>
                         <?php
-                            echo '<input type="number" name="area_max" value="' . $area_max . '">';
+                            echo '<input type="number" name="area_max" value="' . e($area_max) . '">';
                         ?>
 
                         <input type="submit" value="Pesquisar">
@@ -263,7 +200,7 @@
 
                     <h2>Imóveis encontrados</h2>
 
-                    <!-- Lista onde os cards dos imóveis vao ser mostrados -->
+                    <!-- Lista onde os cards dos imóveis vão ser mostrados -->
                     <div class="lista-imoveis">
 
                         <?php foreach ($imoveis as $imovel): ?>
@@ -288,7 +225,7 @@
 
                                 <label><?= e($imovel['nm_tipo_imovel']) ?></label>
 
-                                <label class="preco-texto">R$ <?= e($imovel['vl_preco']) ?></label>
+                                <label class="preco-texto">R$ <?= number_format((float) $imovel['vl_preco'], 2, ',', '.') ?></label>
 
                                 <label><?= e($imovel['nm_logradouro']) ?> | <?= e($imovel['nm_bairro_imovel']) ?></label>
 

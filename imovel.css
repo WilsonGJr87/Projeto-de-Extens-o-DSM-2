@@ -1,3 +1,4 @@
+
 /* Estrutura principal */
 
 .container {
@@ -30,9 +31,13 @@
 /* Imagem do imóvel */
 
 .imovel-image {
+    display: block;
+
     width: 90%;
-    height: auto;
-    object-fit: cover;
+    max-height: 400px;
+
+    object-fit: contain;
+    margin: 20px auto;
 }
 
 /* Características */
