@@ -1,247 +1,148 @@
+/* Pesquisa de imóveis */
+
 .buscar-container {
     display: flex;
-
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    background-image: url("Imagens/49-viva-em-bc.png");
-    /* background-color: var(--cor-primaria); */
-
     width: 100%;
-    height: 400px;
+    min-height: 400px;
 
-    gap: 1%;
+    background-image: url("Imagens/49-viva-em-bc.png");
+    background-position: center;
+    background-size: cover;
 
     border-bottom: 2px solid var(--cor-terciaria);
 }
 
 .card-form-pesquisar {
     display: flex;
-
     flex-direction: column;
-
-    background-color: var(--cor-secundaria);
-
-    border-radius: 10px;
+    gap: 12px;
 
     width: 30%;
-    height: 95%;
-
+    min-height: 95%;
+    margin: 5%;
     padding: 2%;
-    gap: 2%;
-
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; 
-}
-.card-pesquisar {
 
     background-color: var(--cor-secundaria);
-
     border-radius: 10px;
 
-    width: 30%;
-    height: 95%;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 0 5px 0,
+        rgba(0, 0, 0, 0.1) 0 0 1px 0;
 }
 
-.card-form-pesquisar > nav {
+.card-form-pesquisar h2 {
+    margin: 0;
+}
+
+/* Alternância entre comprar e alugar */
+
+.botoes {
     display: flex;
-    
-    justify-content: space-between;
-
-    width: 100%;
-}
-
-h1,h3 {
-    justify-self: center;
-
-    color: var(--texto-primaria);
-}
-
-h2 {
-    font-size:large;
-    padding-bottom: 16px;
-}
-
-.container-produtos {
-    display: flex;
-
-    flex-direction: row;
-
     justify-content: flex-start;
-    flex-wrap: wrap;
-
-    background-color: var(--cor-secundaria);
-
-    width: 100%;
-
-    padding: 2%;
-    gap: 5%;
-    
-}
-
-.card-produto {
-    display: flex;
-    
-    flex-direction: column;
-
-    background-color: var(--cor-secundaria); /*var(--cor-primaria);*/
-
-    width: 285px;
-    height: 285px;
-
-    border-radius: 10px;
-    
-    padding: 5px 0;
-
-    border-bottom: 2px solid var(--cor-terciaria);
-}
-
-.card-produto button {
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 20px;
-}
-
-.card-image {
-    display: flex;
-    width: 100%;
-    height: 50%;
-
-    align-items: start;
-
-    border-radius: 10px;
-}
-
-.preco-texto {
-    font-size: larger;
-    font-weight: bold;
-}
-
-.info-prod {
-    display: flex;
-
-    flex-direction: row;
-
-    justify-content: center;
-    align-items: center;
-
-    flex: 1;
 
     width: 100%;
 }
 
-.prod-icon {
+.seletor {
+    padding: 8px 30px;
 
-    display: flex;
-
-    width: 20px;
-    height: 20px;
-}
-
-
-.card-produto button {
-
-    display: flex;
-
-    align-self: center;
-
-    width: 95%;
-    height: 35px;
-}
-
-.info {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: row;
-    
-    gap: 5%;
-}
-
-.seletor{
     background-color: var(--cor-secundaria);
     color: black;
 
-    padding: 8px;
     font-size: 14px;
-    padding-right: 30px;
-    padding-left: 30px;
-    font-weight:600;
+    font-weight: 600;
 
     border: none;
-    border-bottom: 2px solid #000;
     cursor: pointer;
+    transition: 0.2s linear;
 }
 
-.seletor:hover{
-    color: var(--cor-hover-botao-1);/*darkmagenta*/
-    border-bottom: 2px solid var(--cor-hover-botao-1);/*darkmagenta */
-    transition: .2s linear;
+.seletor:hover {
+    color: var(--cor-hover-botao-1);
+    border-bottom: 2px solid var(--cor-hover-botao-1);
 }
 
-
-.buscar-container label{
-    padding-top: 15px;
+.seletor.ativo {
+    border-bottom: 2px solid #000;
 }
 
-.texto{
-    padding: 8px;
-    padding-left: 11px;
+/* Campos da pesquisa */
+
+.card-form-pesquisar label {
+    padding-top: 8px;
+}
+
+.texto {
+    padding: 8px 8px 8px 11px;
+
     font-size: medium;
-    border-radius: 16px;
-    border: none;
+
     border: 1px solid #000;
+    border-radius: 16px;
     outline: none;
+
+    transition: 0.2s linear;
 }
 
-.texto:hover{
-    transition: .2s linear;
-    border: 1px solid var(--cor-hover-botao-1);/*purple*/
+.texto:hover,
+.texto:focus {
+    border-color: var(--cor-hover-botao-1);
 }
 
-select.texto{
-    padding-left: 20px;
+select.texto {
     appearance: none;
+
     padding: 8px 35px 8px 8px;
+
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
     background-repeat: no-repeat;
     background-position: right 12px center;
 }
 
-.buscar{
+/* Botão de pesquisa */
+
+.buscar {
     padding: 8px;
 
-    font-size: large;
-    border-radius: 16px;
-    border: none;
-    outline: none;
-    background-color: var(--cor-botao-1); /*blueviolet*/
-    font-weight:500;
-
+    background-color: var(--cor-botao-1);
     color: white;
 
+    font-size: large;
+    font-weight: 500;
+
+    border: none;
+    border-radius: 16px;
+    outline: none;
+
     cursor: pointer;
-
-    transition: .2s linear;
+    transition: 0.2s linear;
 }
 
-.buscar:hover{
-    background-color: var(--cor-hover-botao-1);/*rgb(106, 33, 174)*/
+.buscar:hover {
+    background-color: var(--cor-hover-botao-1);
 }
 
-hr {
-    width: 100%;
+/* Responsividade */
 
-    background-color: var(--cor-terciaria);
-
-    padding: .1%;
+@media (max-width: 900px) {
+    .card-form-pesquisar {
+        width: 50%;
+        padding: 3%;
+    }
 }
 
-h1,h3 {
-    width: 100%;
-    text-align: center;
+@media (max-width: 600px) {
+    .buscar-container {
+        justify-content: center;
+    }
 
-    background-color: var(--cor-secundaria);
+    .card-form-pesquisar {
+        width: 85%;
+        margin: 5% 0;
+        padding: 5%;
+    }
 }

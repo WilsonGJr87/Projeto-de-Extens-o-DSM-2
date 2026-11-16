@@ -16,7 +16,6 @@ function reais(float $valor): string
 
 function simularFinanciamento(float $financiado, float $jurosAnual, int $meses, string $sistema): array
 {
-    // taxa efetiva anual convertida para taxa mensal equivalente
     $i = pow(1 + $jurosAnual / 100, 1 / 12) - 1;
 
     $saldo          = $financiado;
@@ -26,10 +25,8 @@ function simularFinanciamento(float $financiado, float $jurosAnual, int $meses, 
     $amortizacaoSac = 0.0;
 
     if ($sistema === 'sac') {
-        // amortização constante: a parcela diminui a cada mês
         $amortizacaoSac = $financiado / $meses;
     } else {
-        // Price: parcela fixa
         $parcelaPrice = $i > 0
             ? $financiado * $i / (1 - pow(1 + $i, -$meses))
             : $financiado / $meses;
@@ -115,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$erros) {
         $resultado = simularFinanciamento($valor - $entrada, $juros, $anos * 12, $dados['sistema']);
 
-        // x + y = z  ->  valor do imóvel + juros = total que você vai pagar
         $totalPago = round($valor + $resultado['total_juros'], 2);
 
         $resultado += [
@@ -352,54 +348,5 @@ $mensagemWpp = sprintf(
 
         </main>
 
-        <footer class="rodape">
-            <div class="superior">
-                <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n" alt="Logo">
-                <a href="#">Comprar</a>
-                <a href="#">Alugar</a>
-                <a href="#">Vender</a>
-                <a href="#">Descobrir</a>
-                <a href="ajuda.php">Ajuda</a>
-            </div>
-            <section class="inferior">
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                        <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="localizacao">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                    <div class="telefone">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                    <div class="whatsapp">
-                        <p>Blumenau/SC (CRECI: 2962-J)</p>
-                        <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    </div>
-                </div>
-            </section>
-            <div class="copyright"><p>© Copyright 2026 Premium Imóveis -</p></div>
-        </footer>
     </body>
 </html>

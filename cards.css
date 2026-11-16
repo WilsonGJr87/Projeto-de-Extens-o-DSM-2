@@ -1,0 +1,237 @@
+
+/* ========================================
+   PRODUTOS
+======================================== */
+
+.container-produtos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    padding: 2%;
+
+    background-color: var(--cor-secundaria);
+}
+
+.carrossel-produtos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5%;
+
+    width: 100%;
+
+    background-color: var(--cor-secundaria);
+}
+
+.card-produto {
+    display: flex;
+    flex-direction: column;
+
+    width: 285px;
+    height: 285px;
+    padding: 5px 0;
+
+    background-color: var(--cor-secundaria);
+    border-radius: 10px;
+    border-bottom: 2px solid var(--cor-terciaria);
+
+    transition: all linear .2s;
+}
+
+.card-produto button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+
+    width: 95%;
+    height: 35px;
+
+    background-color: var(--cor-botao-1);
+    color: white;
+
+    border: none;
+    outline: none;
+    border-radius: 20px;
+
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.card-produto button:hover {
+    background-color: var(--cor-hover-botao-1);
+}
+
+.card-image {
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 50%;
+
+    border-radius: 10px;
+}
+
+.preco-texto {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.info-prod {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    flex: 1;
+    width: 100%;
+}
+
+.prod-icon {
+    display: flex;
+
+    width: 20px;
+    height: 20px;
+}
+
+.card-produto:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.card-produto *:hover {
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+
+/* ========================================
+   FORMULÁRIOS E CAMPOS
+======================================== */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+}
+
+textarea {
+    resize: none;
+}
+
+input,
+textarea {
+    border: none;
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+input {
+    width: 100%;
+    height: 35px;
+}
+
+textarea {
+    width: 100%;
+    height: 125px;
+    padding: 1%;
+}
+
+
+/* ========================================
+   CONTATO
+======================================== */
+
+.contato-container {
+    background-color: var(--cor-secundaria);
+    border: 2px solid var(--cor-terciaria);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#contato-hr {
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+.fechar-btn {
+    align-self: flex-end;
+
+    width: 5%;
+    height: 5%;
+
+    font-size: larger;
+    text-align: center;
+
+    border-radius: 10px;
+    transition: linear .1s;
+}
+
+.fechar-btn:hover {
+    cursor: pointer;
+    background-color: rgb(170, 192, 192);
+}
+
+
+/* ========================================
+   LINKS DE IMÓVEIS
+======================================== */
+
+.imovel-container a {
+    margin: 1%;
+
+    color: var(--texto-terciaria);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.imovel-container a:hover {
+    color: var(--texto-terciaria-hover);
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   ELEMENTOS HTML
+======================================== */
+
+h1,
+h3 {
+    text-align: center;
+
+    background-color: var(--cor-secundaria);
+    color: var(--texto-primaria);
+}
+
+h1 {
+    justify-self: center;
+    padding: 2% 0;
+
+    border-bottom: solid 3px var(--texto-primaria);
+}
+
+h3 {
+    text-align: start;
+}
+
+h2 {
+    padding-bottom: 16px;
+    color: var(--cor-terciaria);
+    font-size: large;
+}
+
+hr {
+    width: 100%;
+    padding: .1%;
+
+    background-color: var(--cor-terciaria);
+}

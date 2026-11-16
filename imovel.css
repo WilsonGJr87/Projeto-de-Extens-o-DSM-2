@@ -1,0 +1,127 @@
+/* Estrutura principal */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+
+    padding: 1%;
+}
+
+.imovel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    width: 45%;
+    padding: 1%;
+
+    background-color: var(--cor-secundaria);
+}
+
+.imovel-container h2,
+.imovel-container h3,
+.imovel-container p {
+    max-width: 100%;
+}
+
+/* Imagem do imóvel */
+
+.imovel-image {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Características */
+
+.container-detalhes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+
+    width: 75%;
+}
+
+.detalhes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalhe {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.detalhe-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Formulário lateral */
+
+.contato-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px;
+
+    width: 25%;
+    padding: 1%;
+
+    border-left: 2px solid var(--cor-terciaria);
+}
+
+#contato-hr {
+    width: 100%;
+    padding-bottom: 12px;
+
+    text-align: center;
+
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+/* Separador */
+
+#middle {
+    width: 75%;
+    margin: 20px auto;
+    padding: 1px;
+
+    background-color: var(--cor-terciaria);
+    border: none;
+}
+
+/* Responsividade */
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .imovel-container {
+        width: 90%;
+    }
+
+    .contato-sidebar {
+        width: 90%;
+        border-left: none;
+        border-top: 2px solid var(--cor-terciaria);
+    }
+
+    .container-detalhes {
+        width: 90%;
+    }
+}

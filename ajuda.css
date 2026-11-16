@@ -191,4 +191,9 @@ summary:focus-visible {
     .container-categorias {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .card-financiamento,
+    .card-categoria[href="financiamento.php"] {
+        grid-column: 2;
+    }
 }

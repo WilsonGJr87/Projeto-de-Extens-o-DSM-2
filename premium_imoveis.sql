@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `nm_cliente` varchar(60) NOT NULL,
-  `cd_cpf_cnpj_cliente` varchar(18) NOT NULL,
-  `nm_email_cliente` varchar(60) NOT NULL,
+  `cd_cpf_cnpj_cliente` varchar(18) UNIQUE NOT NULL,
+  `nm_email_cliente` varchar(60) UNIQUE NOT NULL,
   `cd_senha_cliente` varchar(255) NOT NULL,
   `cd_telefone_cliente` varchar(20) DEFAULT NULL,
-  `dt_cadastro_cliente` date DEFAULT NULL,
+  `dt_cadastro_cliente` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `nm_tipo_cliente` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
