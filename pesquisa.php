@@ -1,5 +1,6 @@
 
 <?php
+    session_start();
     // Importa o arquivo responsável pela conexão com o banco de dados
     require_once 'conexao.php';
     require_once 'criador_de_template.php';

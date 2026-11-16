@@ -1,4 +1,5 @@
 <?php
+session_start();
 $wppNum = '5513900000000';
 
 function lerNumero(string $valor): ?float

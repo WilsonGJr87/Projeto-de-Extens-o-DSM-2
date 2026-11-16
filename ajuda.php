@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once "criador_de_template.php";
 

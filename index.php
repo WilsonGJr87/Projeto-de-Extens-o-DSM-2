@@ -77,7 +77,7 @@ $opt = "comprar";
         <!-- Pesquisa de imóveis -->
         <section class="buscar-container">
 
-            <form class="card-form-pesquisar" action="pesquisar.php?finalidade=<?php echo $opt; ?>" method="POST">
+            <form class="card-form-pesquisar" action="pesquisa.php?finalidade=<?php echo $opt; ?>" method="POST">
 
                 <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
 
