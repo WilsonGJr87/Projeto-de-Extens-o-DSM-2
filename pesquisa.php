@@ -17,6 +17,8 @@
     $banheiros = "";
     $area_min = "";
     $area_max = "";
+
+    $finalidade = $_GET['finalidade'] ?? "";
     // Verifica se o formulário foi enviado pelo método POST tudo certinho
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Recebe os valores preenchidos nos filtros (vc se matou pra entender isso)
@@ -40,6 +42,8 @@
     AND imovel.nm_bairro_imovel LIKE :bairro
     AND imovel.nm_tipo_imovel LIKE :tipo
 
+    AND (:finalidade_vazio = '' OR imovel.nm_finalidade_imovel = :finalidade_valor)
+
     AND (:quartos_vazio = '' OR imovel.qt_quarto_imovel >= :quartos_valor)
     AND (:banheiros_vazio = '' OR imovel.qt_banheiro_imovel >= :banheiros_valor)
 
@@ -50,6 +54,8 @@
     $consulta->bindValue(':cidade', '%' . $cidade . '%');
     $consulta->bindValue(':bairro', '%' . $bairro . '%');
     $consulta->bindValue(':tipo', '%' . $tipo . '%');
+    $consulta->bindValue(':finalidade_vazio', $finalidade);
+    $consulta->bindValue(':finalidade_valor', $finalidade);
 
     // Define os valores dos filtros numéricos
     $consulta->bindValue(':quartos_vazio', $quartos);
@@ -127,7 +133,12 @@
 
                 <aside class="filtros">
 
-                    <form action="pesquisa.php" method="POST">
+                    <form action="pesquisa.php?finalidade=<?= e($finalidade) ?>" method="POST">
+
+                        <div class="botoes">
+                            <a id="comprarOPT" href="?finalidade=comprar" class="seletor<?= $finalidade == 'comprar' ? ' ativo' : '' ?>">Comprar</a>
+                            <a id="alugarOPT" href="?finalidade=alugar" class="seletor<?= $finalidade == 'alugar' ? ' ativo' : '' ?>">Alugar</a>
+                        </div>
 
                         <label>Cidade:</label>
                         <?php

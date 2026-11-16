@@ -213,3 +213,35 @@ main h1 {
         grid-template-columns: 1fr;
     }
 }
+
+.botoes {
+    display: flex;
+    justify-content: flex-start;
+
+    width: 100%;
+}
+
+.seletor {
+    padding: 8px 30px;
+
+    text-decoration: none;
+
+    background-color: var(--cor-secundaria);
+    color: black;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border: none;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.seletor:hover {
+    color: var(--cor-hover-botao-1);
+    border-bottom: 2px solid var(--cor-hover-botao-1);
+}
+
+.seletor.ativo {
+    border-bottom: 2px solid #000;
+}
