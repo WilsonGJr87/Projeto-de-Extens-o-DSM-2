@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['id_cliente'])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once "conexao.php";
 require_once "criador_de_template.php";
 

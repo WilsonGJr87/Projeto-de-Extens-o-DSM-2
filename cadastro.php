@@ -44,7 +44,21 @@
         } else{
             $senha = password_hash($senha, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO cliente (nm_cliente, cd_cpf_cnpj_cliente, cd_telefone_cliente, nm_email_cliente, cd_senha_cliente) VALUES (:nome, :cpfcnpj, :telefone, :email, :senha)";
+            $sql = "INSERT INTO cliente (
+                    nm_cliente,
+                    cd_cpf_cnpj_cliente,
+                    cd_telefone_cliente,
+                    nm_email_cliente,
+                    cd_senha_cliente,
+                    nm_tipo_cliente
+                ) VALUES (
+                    :nome,
+                    :cpfcnpj,
+                    :telefone,
+                    :email,
+                    :senha,
+                    :tipo
+                )";
             
             $consulta = $conexao->prepare($sql);
 
@@ -53,7 +67,8 @@
                 ':cpfcnpj' => $cpfcnpj,
                 ':telefone' => $telefone,
                 ':email' => $email,
-                ':senha' => $senha
+                ':senha' => $senha,
+                ':tipo' => 'Cliente'
             ]);
             
             $mensagem = "Conta criada com sucesso!";

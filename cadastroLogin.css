@@ -11,11 +11,9 @@ form{
     align-items: center;
     font-size: 23px;
     padding: 2%;
-    background-color: aliceblue;
     height: 500px;
-    border-radius: 10px;
     color:#7a7f83;
-    width: 90%;
+    width: 40%;
     max-width: 700px;
     min-width: 300px;
     box-sizing: border-box;
@@ -45,12 +43,13 @@ input:focus{
 input[type='submit']{
     font-weight: bold;
     border-color: transparent;
+    background-color: var(--cor-botao-1);
     transition-duration: 0.25s;
     width: 90%;
 }
 
 input[type='submit']:hover{
-    background-color: #f5d64d;
+    background-color: var(--cor-hover-botao-1);
     cursor: pointer;
     
 }
