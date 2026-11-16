@@ -1,44 +1,47 @@
 <?php
 
-    if(isset($_COOKIE['email'])){
-        $email = $_COOKIE['email'];
-    }
-    else{
-        $email="";
-    }
+    require_once "conexao.php";
 
+    session_start();
+
+    $email = "";
     $mensagem = "";
 
+    if (isset($_COOKIE['cliente'])) {
+    $email = $_COOKIE['cliente'];
+    }
+
     if($_SERVER['REQUEST_METHOD'] ==="POST"){
-        if(isset($_POST['email']) && isset($_POST['senha'])){
             
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
+        $email = trim($_POST['email'] ?? '');
+        $senha = $_POST['senha'] ?? '';
 
-            if(isset($_POST['lembre'])){
-                setcookie('email',$email,time()+3600);
-            }
+        $sql = "SELECT * FROM cliente WHERE nm_email_cliente = :email";
+        $consulta = $conexao->prepare($sql);
+        $consulta->execute([':email' => $email]);
 
-            $arquivo = fopen("usuarios.txt", "r");
-            $conteudo = fread($arquivo, filesize("usuarios.txt"));
-            fclose($arquivo);
+        $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
 
-            $usuarios = explode("\n", $conteudo);
-            array_pop($usuarios); 
+        if ($cliente) {
+            if (password_verify($senha, $cliente['cd_senha_cliente'])) {
+                $_SESSION['id_cliente'] = $cliente['id_cliente'];
+                $_SESSION['nome_cliente'] = $cliente['nm_cliente'];
+                $_SESSION['email_cliente'] = $cliente['nm_email_cliente'];
 
-            foreach($usuarios as $user){
-            $u = explode("|", $user);
-
-                if($email==$u[2] && $senha==$u[3]){
-                    session_start();
-                    $_SESSION['email-user'] = $email;
-                    header('Location:index.php');
-                    exit();
+                if (isset($_POST['lembre'])) {
+                    setcookie("cliente", $email, time() + 3600, "/");
+                } else {
+                    setcookie("cliente", $email, 0, "/");
                 }
+
+                header("Location: index.php");
+                exit();
+            } else{
+                $mensagem = "Senha incorreta!";
             }
-            
-            $mensagem = "Email ou senha incorretos!";
-            
+        
+        } else{
+            $mensagem = "Email não encontrado!";
         }
 
     }
@@ -52,7 +55,6 @@
 
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="cadastroLogin.css">
-
     <title>Login</title>
 </head>
 <body>
@@ -73,12 +75,12 @@
             <legend>Acesse sua conta</legend>
             
             <div class="login">
-            <input type="email" name="email" placeholder="Seu email" required>
+            <input type="email" name="email" placeholder="Seu email" value="<?php $email ?>" required>
             <input type="password" name="senha" placeholder="Sua senha" required>
             <p class="lembre"><input type="checkbox" name="lembre">Lembre-me</p>
             </div>
             <?php if ($mensagem !== ""): ?>
-            <p class="mensagemSucesso">
+            <p class="mensagem">
                 <?= ($mensagem) ?>
             </p>
             <?php endif; ?>
