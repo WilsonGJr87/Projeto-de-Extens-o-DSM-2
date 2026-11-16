@@ -1,5 +1,4 @@
 main{
-    background-color: aqua;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,7 +39,7 @@ input{
 }
 
 input:focus{
-    border-color: aqua;
+    border-color: #eeca2d;
 }
 
 input[type='submit']{
@@ -51,7 +50,7 @@ input[type='submit']{
 }
 
 input[type='submit']:hover{
-    background-color: rgb(129, 255, 255);
+    background-color: #f5d64d;
     cursor: pointer;
     
 }
@@ -62,7 +61,7 @@ input[type='submit']:hover{
     align-items: center;
 }
 
-.mensagemSucesso{
+.mensagem{
     font-size: 18px;
 }
 

@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --cor-primaria: #faebd7;
-    --cor-secundaria:#7a7f83;
+    --cor-primaria:#080805;
+    --cor-secundaria:#F9F7F1;
+    --cor-terciaria:#d3940d;
+
+    --cor-botao-1:#eeca2d;
+    --cor-hover-botao-1:#f3bd29;
+
+    --cor-teste: #0F0E09;
+
+    --texto-primaria: #252525;
+    --texto-secundaria: #cacaca;
+    --texto-terciaria: #dbb126;
+    --texto-terciaria-hover: #d3940d;
 }
 
 * {
@@ -34,20 +45,96 @@ header {
     height: 4%;
 
     padding: .5%;
+
+    border-bottom: 2px solid var(--cor-terciaria);
 }
 
-header > img {
-    width: 3%;
+header img {
+    width: 4%;
+}
+
+.superior img {
+    width: 6%;
+    padding: 5px;
 }
 
 main {
     flex: 1;
+
+    background-color: var(--cor-secundaria);
 }
 
 footer {
     display: flex;
 
-    background-color: var(--cor-secundaria);
+    flex-direction: column;
+
+    color: #F9F7F1;
+    background-color: var(--cor-primaria);
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    border-top: 2px solid var(--cor-terciaria);
+}
+
+nav {
+    display: flex;
+    flex: 1;
+
+    justify-content: flex-end;
+}
+
+nav a, .superior a {
+    text-decoration: none;
+
+    color: var(--texto-secundaria);
+
+    margin: 1%;
+
+}
+
+nav a:hover, .superior a:hover {
+    text-decoration: underline;
+    color: var(--texto-terciaria-hover);
+}
+
+.superior {
+    display: flex;
+
+    color: #F9F7F1;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 60%;
+
+    margin: 1% 0 0 0;
+    border-bottom: 2px solid var(--cor-secundaria);
+}
+
+.inferior {
+    display: flex;
+
+    flex-direction: row;
+
+    width: 60%;
+    gap: 30px;
+
+    padding: 2% 0;
+}
+
+.inferior > div {
+    flex: 1;
+}
+
+.copyright {
+    display: flex;
+
+    color: #F9F7F1;
+    background-color: var(--cor-teste);
 
     justify-content: space-between;
     align-items: center;
@@ -55,6 +142,39 @@ footer {
     width: 100%;
     height: 7%;
 
-    padding: 1%;
+    padding: .5%;
+}
 
+.localizacao, .whatsapp, .telefone {
+    position: relative;
+    width: 100%;
+    
+    padding: 10px 10px 10px 40px;
+}
+
+.localizacao::before,
+.whatsapp::before,
+.telefone::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 30px;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.localizacao::before {
+    background-image: url("svg/location.svg");
+}
+.whatsapp::before {
+    background-image: url("svg/whats.svg");
+}
+.telefone::before {
+    background-image: url("svg/phone.svg");
 }
