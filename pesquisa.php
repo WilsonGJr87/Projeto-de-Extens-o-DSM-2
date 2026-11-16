@@ -134,10 +134,12 @@
                 <aside class="filtros">
 
                     <form action="pesquisa.php?finalidade=<?= e($finalidade) ?>" method="POST">
+
                         <div class="botoes">
-                            <a id="comprarOPT" href="?finalidade=comprar" class="seletor ativo">Comprar</a>
-                            <a type="button" id="alugarOPT" href="?finalidade=alugar" class="seletor">Alugar</a>
+                            <a id="comprarOPT" href="?finalidade=comprar" class="seletor<?= $finalidade == 'comprar' ? ' ativo' : '' ?>">Comprar</a>
+                            <a id="alugarOPT" href="?finalidade=alugar" class="seletor<?= $finalidade == 'alugar' ? ' ativo' : '' ?>">Alugar</a>
                         </div>
+
                         <label>Cidade:</label>
                         <?php
                             echo '<input type="text" name="cidade" value="' . $cidade . '">';

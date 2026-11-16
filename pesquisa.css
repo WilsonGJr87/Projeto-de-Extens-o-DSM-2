@@ -214,8 +214,17 @@ main h1 {
     }
 }
 
+.botoes {
+    display: flex;
+    justify-content: flex-start;
+
+    width: 100%;
+}
+
 .seletor {
     padding: 8px 30px;
+
+    text-decoration: none;
 
     background-color: var(--cor-secundaria);
     color: black;
