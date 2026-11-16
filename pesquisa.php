@@ -1,6 +1,11 @@
 <?php
     // Importa o arquivo responsável pela conexão com o banco de dados
-    require 'conexao.php';
+    require_once 'conexao.php';
+    require_once 'criador_de_template.php';
+
+    function e($valor) {
+        return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
+    }
 ?>
 
 <?php
@@ -74,27 +79,49 @@
 
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="pesquisa.css">
+        <link rel="stylesheet" href="cards.css">
+        <link rel="stylesheet" href="contato.css">
 
-        <title>Pesquisa de Imóveis</title>
+        <title>Pesquisa</title>
+
+        <script src="cards.js" defer></script>
+        <script src="home.js" defer></script>
     </head>
 
     <body>
 
-        <header>
-            <img src="https://imgs.search.brave.com/pFuXyL40XNW9Oa0CY8o8C2n1kqRWZlzlkctFQ3VsW34/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMucmZzdGF0LmNv/bS9yZW5kZXJmb3Jl/c3QvaW1hZ2VzL3Yy/L2xvZ28taG9tZXBh/Z2UvbG9nby01LTEu/cG5n">
-
-            <nav>
-                <a href="#">Comprar</a>
-                <a href="#">Alugar</a>
-                <a href="#">Vender</a>
-                <a href="#">Descobrir</a>
-                <a href="#">Ajuda</a>
-            </nav>
-        </header>
+        <?php mostrar_header(); ?>
 
         <main>
 
-            <h1>Encontre seu imóvel ideal</h1>
+            <!-- Modal de contato (usado pelo botão "Contatar" dos cards) -->
+            <form id="contatoDiv" class="contato-modal" action="#" method="POST">
+
+                <button type="button" class="fechar-btn" onclick="fecharcontato()" aria-label="Fechar formulário">X</button>
+
+                <div class="campo">
+                    <label for="modal-nome">Nome</label>
+                    <input type="text" id="modal-nome" name="nome" required>
+                </div>
+
+                <div class="campo">
+                    <label for="modal-email">E-mail</label>
+                    <input type="email" id="modal-email" name="email" required>
+                </div>
+
+                <div class="campo">
+                    <label for="modal-telefone">Telefone</label>
+                    <input type="tel" id="modal-telefone" name="telefone" required>
+                </div>
+
+                <div class="campo">
+                    <label for="modal-mensagem">Mensagem</label>
+                    <textarea id="modal-mensagem" name="mensagem" rows="5" required>Olá, tenho interesse neste imóvel.</textarea>
+                </div>
+
+                <button class="contato-enviar" type="submit">Enviar</button>
+
+            </form>
 
             <div class="layout-pesquisa">
 
@@ -224,52 +251,61 @@
                 <section class="resultados">
 
                     <h2>Imóveis encontrados</h2>
+
                     <!-- Lista onde os cards dos imóveis vao ser mostrados -->
                     <div class="lista-imoveis">
-                        <?php
-                            // Percorre todos os imóveis encontrados no banco de dados (aulinha do ale)
-                            foreach ($imoveis as $imovel) {
-                        ?>
 
-                        <!-- Div que cria os cards que vao apresentar as informações de um imóvel -->
-                        <div class="card-imovel">
+                        <?php foreach ($imoveis as $imovel): ?>
 
-                            <!-- Exibe a imagem do imóvel -->
-                            <img src="<?php echo $imovel['caminho']; ?>" alt="Imagem do imóvel">
+                            <?php
+                            $lista = [
+                                ["info" => $imovel['qt_area_total_imovel'], "title" => "área total", "icon" => "svg/tamanho.svg", "unidade" => " m²"],
+                                ["info" => $imovel['qt_quarto_imovel'], "title" => "quartos", "icon" => "svg/cama.svg", "unidade" => ""],
+                                ["info" => $imovel['qt_banheiro_imovel'], "title" => "banheiros", "icon" => "svg/toilet.svg", "unidade" => ""],
+                                ["info" => $imovel['qt_vaga_imovel'], "title" => "vagas", "icon" => "svg/vaga.svg", "unidade" => ""]
+                            ];
 
-                            <!-- Área que reúne as informações do imóvel -->
-                            <div class="informacoes-imovel">
-                                <h3>
-                                    <?php echo $imovel['nm_tipo_imovel'] . " em " . $imovel['nm_cidade_imovel']; ?>
-                                </h3>
+                            // Usa a imagem do banco; se o imóvel não tiver, usa a imagem padrão
+                            $imagem = !empty($imovel['caminho']) ? $imovel['caminho'] : "Imagens/imagem-teste.png";
+                            ?>
 
-                                <!-- Exibe o bairro e o tipo do imóvel -->
-                                <p><strong>Bairro:</strong> <?php echo $imovel['nm_bairro_imovel']; ?></p>
-                                <p><strong>Tipo:</strong> <?php echo $imovel['nm_tipo_imovel']; ?></p>
+                            <form class="card-produto" action="imovel.php" method="GET" onclick="verimovel(this)">
 
-                                <!-- Organiza os detalhes do imóvel em uma gradezinha -->
-                                <div class="detalhes-imovel">
-                                    <p><strong>Quartos:</strong> <?php echo $imovel['qt_quarto_imovel']; ?></p>
-                                    <p><strong>Banheiros:</strong> <?php echo $imovel['qt_banheiro_imovel']; ?></p>
+                                <input type="hidden" name="id" value="<?= e($imovel['id_imovel']) ?>">
 
-                                    <!-- Exibe as áreas total e contruída -->
-                                    <p><strong>Área total:</strong> <?php echo $imovel['qt_area_total_imovel']; ?>m²</p>
-                                    <p><strong>Área construída:</strong> <?php echo $imovel['qt_area_construida_imovel']; ?>m²</p>
+                                <img class="card-image" src="<?= e($imagem) ?>" alt="Imagem do imóvel">
+
+                                <label><?= e($imovel['nm_tipo_imovel']) ?></label>
+
+                                <label class="preco-texto">R$ <?= e($imovel['vl_preco']) ?></label>
+
+                                <label><?= e($imovel['nm_logradouro']) ?> | <?= e($imovel['nm_bairro_imovel']) ?></label>
+
+                                <div class="info-prod">
+
+                                    <?php foreach ($lista as $info): ?>
+
+                                        <div class="info">
+                                            <img src="<?= e($info['icon']) ?>" class="prod-icon" alt="">
+                                            <label><?= e($info['info']) . e($info['unidade']) ?></label>
+                                        </div>
+
+                                    <?php endforeach; ?>
+
                                 </div>
 
-                                <button class="botao-imovel">Ver imóvel</button>
-                            </div>
-                        </div>
-                    <?php
-                        }
-                    ?>
+                                <button type="button" onclick="event.stopPropagation(); abrircontato()">Contatar</button>
+
+                            </form>
+
+                        <?php endforeach; ?>
+
                     </div>
+
                 </section>
             </div>
         </main>
 
-        <footer class="rodape">
-            <p>© Copyright 2026 Premium Imóveis -</p>
-        </footer>
+        <?php mostrar_footer(); ?>
     </body>
 </html>

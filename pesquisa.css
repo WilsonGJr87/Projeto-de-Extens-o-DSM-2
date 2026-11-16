@@ -11,7 +11,6 @@ main {
 }
 
 main h1 {
-    color: var(--cor-secundaria);
     text-align: center;
     font-size: 30px;
 }
@@ -68,7 +67,7 @@ main h1 {
 
 .filtros input[type="submit"] {
     background-color: var(--cor-botao-1);
-    color: var(--texto-primaria);
+    color: white;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -84,7 +83,7 @@ main h1 {
 
 .resultados {
     min-width: 0;
-    color: var(--cor-secundaria);
+    color: var(--texto-primaria);
 }
 
 .resultados h2 {
@@ -98,6 +97,7 @@ main h1 {
 .lista-imoveis {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
     gap: 20px;
     background-color: var(--cor-secundaria);
     border: 1px solid var(--cor-terciaria);
@@ -175,7 +175,7 @@ main h1 {
     padding: 9px;
     margin-top: 8px;
     background-color: var(--cor-botao-1);
-    color: var(--texto-primaria);
+    color: white;
     border: none;
     border-radius: 6px;
     font-size: 13px;
