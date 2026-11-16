@@ -213,3 +213,26 @@ main h1 {
         grid-template-columns: 1fr;
     }
 }
+
+.seletor {
+    padding: 8px 30px;
+
+    background-color: var(--cor-secundaria);
+    color: black;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border: none;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.seletor:hover {
+    color: var(--cor-hover-botao-1);
+    border-bottom: 2px solid var(--cor-hover-botao-1);
+}
+
+.seletor.ativo {
+    border-bottom: 2px solid #000;
+}
