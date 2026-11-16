@@ -1,10 +1,4 @@
 <?php
-/*
- * Simulador de financiamento imobiliário
- * Sistemas: Price (parcelas fixas) e SAC (parcelas decrescentes)
- */
-
-// Número do WhatsApp: só dígitos, com código do país e DDD (ex.: 55 + 13 + número)
 $wppNum = '5513900000000';
 
 function lerNumero(string $valor): ?float

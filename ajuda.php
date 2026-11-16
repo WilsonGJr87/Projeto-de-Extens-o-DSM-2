@@ -1,5 +1,5 @@
 <?php
-// Número do WhatsApp: só dígitos, com código do país e DDD (ex.: 55 + 13 + número)
+
 $wppNum = '5513900000000';
 ?>
 
