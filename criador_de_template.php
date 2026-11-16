@@ -3,14 +3,20 @@
 function mostrar_header() {
 ?>
     <header>
-        <img src="Imagens/logo.png" alt="Premium Imóveis">
-
+        <img id="logo" onclick="window.location.href = 'index.php'" src="Imagens/logo.png" alt="Premium Imóveis">
+        
         <nav>
             <a href="pesquisa.php?finalidade=comprar">Comprar</a>
             <a href="pesquisa.php?finalidade=alugar">Alugar</a>
             <a href="#">Vender</a>
             <a href="pesquisa.php">Descobrir</a>
             <a href="ajuda.php">Ajuda</a>
+
+            <?php if (isset($_SESSION['id_cliente'])): ?>
+                <button class="botao-login" type="button" onclick="window.location.href = 'logout.php'">Sair</button>
+            <?php else: ?>
+                <button class="botao-login" type="button" onclick="window.location.href = 'login.php'">Entrar</button>
+            <?php endif; ?>
         </nav>
     </header>
 <?php

@@ -1,3 +1,4 @@
+
 <?php
 
     require_once "conexao.php";
@@ -7,13 +8,8 @@
         return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
     }
 
-    $mensagem = "";
     $mensagem1 = "";
     $mensagem2 = "";
-    $email = "";
-    $cpfcnpj = "";
-    $emailExiste = false;
-    $cpfcnpjExiste = false;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome = trim($_POST['nome']);
@@ -25,14 +21,14 @@
         $sql = "SELECT * FROM cliente WHERE nm_email_cliente = :email";
         $consulta = $conexao->prepare($sql);
         $consulta->execute([':email' => $email]);
-        $emailExiste = $consulta->fetch() ? true : false;
+        $emailExiste = $consulta->fetch();
 
         $sql = "SELECT * FROM cliente WHERE cd_cpf_cnpj_cliente = :cpfcnpj";
         $consulta = $conexao->prepare($sql);
         $consulta->execute([':cpfcnpj' => $cpfcnpj]);
-        $cpfcnpjExiste = $consulta->fetch() ? true : false;
+        $cpfcnpjExiste = $consulta->fetch();
 
-        if ($emailExiste || $cpfcnpjExiste){
+        if ($emailExiste || $cpfcnpjExiste) {
             if ($emailExiste) {
                 $mensagem1 = "Este email já possui conta cadastrada!";
             }
@@ -41,9 +37,7 @@
                 $mensagem2 = "Este CPF/CNPJ já possui conta cadastrada!";
             }
 
-        } else{
-            $senha = password_hash($senha, PASSWORD_DEFAULT);
-
+        } else {
             $sql = "INSERT INTO cliente (
                     nm_cliente,
                     cd_cpf_cnpj_cliente,
@@ -59,7 +53,7 @@
                     :senha,
                     :tipo
                 )";
-            
+
             $consulta = $conexao->prepare($sql);
 
             $consulta->execute([
@@ -70,13 +64,13 @@
                 ':senha' => $senha,
                 ':tipo' => 'Cliente'
             ]);
-            
-            $mensagem = "Conta criada com sucesso!";
+
+            $mensagem1 = "Conta criada com sucesso!";
+            header("Location: login.php");
         }
     }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -102,19 +96,19 @@
             <input type="email" name="email" placeholder="Seu email" required>
             <input type="password" name="senha" placeholder="Sua senha" required>
             </div>
-            <?php 
-                if ($mensagem1 !== ""): ?>
-                    <p class="mensagem">
-                        <?= ($mensagem1) ?>
-                    </p>
-                <?php endif;
 
-                if ($mensagem2 !== ""): ?>
-                    <p class="mensagem">
-                        <?= ($mensagem2) ?>
-                    </p>
-                <?php endif;
-                ?>
+            <?php if ($mensagem1 !== ""): ?>
+                <p class="mensagem">
+                    <?= e($mensagem1) ?>
+                </p>
+            <?php endif; ?>
+
+            <?php if ($mensagem2 !== ""): ?>
+                <p class="mensagem">
+                    <?= e($mensagem2) ?>
+                </p>
+            <?php endif; ?>
+
             <input type="submit" value="Criar Conta">
             <p class="mensagemCadLog">Já possui conta? <a href='login.php'>Faça seu login</a></p>
         </form>

@@ -1,6 +1,74 @@
-:root {
-    --texto-suave: #5c5a52;
+body {
+    background-color: var(--cor-secundaria);
 }
+
+/* Busca (mesmo visual da pesquisa da home) */
+
+.buscar-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    min-height: 400px;
+
+    background-image: url("Imagens/49-viva-em-bc.png");
+    background-position: center;
+    background-size: cover;
+
+    border-bottom: 2px solid var(--cor-terciaria);
+}
+
+.card-form-pesquisar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 30%;
+    margin: 5%;
+    padding: 2%;
+
+    background-color: var(--cor-secundaria);
+    border-radius: 10px;
+
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 0 5px 0,
+        rgba(0, 0, 0, 0.1) 0 0 1px 0;
+}
+
+.card-form-pesquisar h1 {
+    margin: 0;
+
+    color: var(--cor-terciaria);
+    font-size: large;
+    text-align: start;
+}
+
+.card-form-pesquisar p {
+    margin: 0;
+
+    color: var(--texto-primaria);
+}
+
+.texto {
+    width: 100%;
+    padding: 8px 8px 8px 11px;
+
+    font-size: medium;
+
+    border: 1px solid #000;
+    border-radius: 16px;
+    outline: none;
+
+    transition: 0.2s linear;
+}
+
+.texto:hover,
+.texto:focus {
+    border-color: var(--cor-hover-botao-1);
+}
+
+/* Conteúdo da página */
 
 main {
     width: 100%;
@@ -12,63 +80,21 @@ main {
     color: var(--texto-primaria);
 }
 
-h1 {
-    text-align: center;
-}
-
-h2 {
-    font-size: large;
-
+main h2 {
     margin: 2rem 0 1rem;
+
+    color: var(--cor-terciaria);
+    font-size: large;
 }
 
-.buscar-container {
-    text-align: center;
+main h2:first-child {
+    margin-top: 0;
 }
 
-.buscar-container > p {
-    margin: .5rem 0 1.5rem;
-
-    color: var(--texto-suave);
-}
-
-.card-form-pesquisar {
-    background-color: var(--cor-primaria);
-
-    border-radius: 10px;
-    border-bottom: 2px solid var(--cor-terciaria);
-
-    max-width: 640px;
-
-    margin: 0 auto;
-    padding: 1rem;
-
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-}
-
-.texto {
-    width: 100%;
-
-    padding: 8px;
-    padding-left: 11px;
-    font-size: medium;
-    border-radius: 16px;
-    border: 1px solid var(--cor-terciaria);
-    outline: none;
-
-    background-color: var(--cor-secundaria);
-    color: var(--texto-primaria);
-}
-
-.texto:hover,
-.texto:focus {
-    transition: .2s linear;
-    border: 1px solid var(--cor-hover-botao-1);
-}
+/* Categorias */
 
 .container-categorias {
     display: grid;
-
     grid-template-columns: 1fr;
     gap: .75rem;
 }
@@ -78,6 +104,7 @@ h2 {
     align-items: center;
 
     min-height: 3.5rem;
+    padding: 1rem;
 
     background-color: var(--cor-primaria);
     color: var(--cor-secundaria);
@@ -85,22 +112,22 @@ h2 {
     border-radius: 10px;
     border-bottom: 2px solid var(--cor-terciaria);
 
-    padding: 1rem;
-
     font-weight: 600;
     text-decoration: none;
 
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 0 5px 0,
+        rgba(0, 0, 0, 0.1) 0 0 1px 0;
 
     transition: .2s linear;
 }
 
 .card-categoria:hover {
     border-bottom-color: var(--cor-hover-botao-1);
-    color: var(--texto-terciaria);
-
     transform: translateY(-2px);
 }
+
+/* Perguntas frequentes */
 
 .container-faq > details {
     padding: 1rem 0;
@@ -111,9 +138,10 @@ h2 {
 .container-faq > details > summary {
     padding: .25rem 0;
 
-    cursor: pointer;
+    color: var(--texto-primaria);
     font-weight: 500;
 
+    cursor: pointer;
     transition: .2s linear;
 }
 
@@ -130,23 +158,27 @@ h2 {
 .faq-status {
     margin-top: 1rem;
 
+    color: var(--texto-secundaria);
     text-align: center;
-    color: var(--texto-suave);
 }
 
+/* WhatsApp */
+
 .card-whatsapp {
-    background-color: var(--cor-primaria);
-    color: var(--cor-secundaria);
+    margin-top: 2rem;
+    padding: 1.5rem;
+
+    background-color: var(--cor-secundaria);
+    color: var(--texto-primaria);
 
     border-radius: 10px;
     border-bottom: 2px solid var(--cor-terciaria);
 
-    margin-top: 2rem;
-    padding: 1.5rem;
-
     text-align: center;
 
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 0 5px 0,
+        rgba(0, 0, 0, 0.1) 0 0 1px 0;
 }
 
 .card-whatsapp > h2 {
@@ -162,17 +194,17 @@ h2 {
 .botao-whatsapp {
     padding: 8px 28px;
 
-    font-size: large;
-    border-radius: 16px;
-    border: none;
-    outline: none;
     background-color: var(--cor-botao-1);
+    color: white;
+
+    font-size: large;
     font-weight: 500;
 
-    color: var(--texto-primaria);
+    border: none;
+    border-radius: 16px;
+    outline: none;
 
     cursor: pointer;
-
     transition: .2s linear;
 }
 
@@ -186,6 +218,8 @@ summary:focus-visible {
     outline: 2px solid var(--cor-terciaria);
     outline-offset: 3px;
 }
+
+/* Responsividade */
 
 @media (min-width: 480px) {
     .container-categorias {
@@ -205,5 +239,24 @@ summary:focus-visible {
     .card-financiamento,
     .card-categoria[href="financiamento.php"] {
         grid-column: 2;
+    }
+}
+
+@media (max-width: 900px) {
+    .card-form-pesquisar {
+        width: 50%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 600px) {
+    .buscar-container {
+        justify-content: center;
+    }
+
+    .card-form-pesquisar {
+        width: 85%;
+        margin: 5% 0;
+        padding: 5%;
     }
 }

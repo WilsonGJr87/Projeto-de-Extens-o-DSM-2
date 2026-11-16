@@ -178,3 +178,29 @@ nav a:hover, .superior a:hover {
 .telefone::before {
     background-image: url("svg/phone.svg");
 }
+
+#logo:hover {
+    cursor: pointer;
+}
+
+.botao-login {
+    text-decoration: none;
+
+    color: var(--cor-primaria);
+    background-color: var(--cor-botao-1);
+
+    margin: 1%;
+    padding: 8px 18px;
+
+    border: none;
+    border-radius: 16px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.botao-login:hover {
+    background-color: var(--cor-hover-botao-1);
+}

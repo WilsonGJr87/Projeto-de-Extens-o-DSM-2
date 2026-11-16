@@ -1,3 +1,4 @@
+
 <?php
 
     require_once "conexao.php";
@@ -13,7 +14,7 @@
     $mensagem = "";
 
     if (isset($_COOKIE['cliente'])) {
-    $email = $_COOKIE['cliente'];
+        $email = $_COOKIE['cliente'];
     }
 
     if($_SERVER['REQUEST_METHOD'] ==="POST"){
@@ -28,7 +29,7 @@
         $cliente = $consulta->fetch(PDO::FETCH_ASSOC);
 
         if ($cliente) {
-            if (password_verify($senha, $cliente['cd_senha_cliente'])) {
+            if ($senha === $cliente['cd_senha_cliente']) {
                 $_SESSION['id_cliente'] = $cliente['id_cliente'];
                 $_SESSION['nome_cliente'] = $cliente['nm_cliente'];
                 $_SESSION['email_cliente'] = $cliente['nm_email_cliente'];
@@ -39,8 +40,8 @@
                     setcookie("cliente", $email, 0, "/");
                 }
 
+                $mensagem = "Login realizado com sucesso!";
                 header("Location: index.php");
-                exit();
             } else{
                 $mensagem = "Senha incorreta!";
             }
@@ -70,15 +71,17 @@
             <legend>Acesse sua conta</legend>
             
             <div class="login">
-            <input type="email" name="email" placeholder="Seu email" value="<?php $email ?>" required>
+            <input type="email" name="email" placeholder="Seu email" value="<?= e($email) ?>" required>
             <input type="password" name="senha" placeholder="Sua senha" required>
             <p class="lembre"><input type="checkbox" name="lembre">Lembre-me</p>
             </div>
+
             <?php if ($mensagem !== ""): ?>
             <p class="mensagem">
-                <?= ($mensagem) ?>
+                <?= e($mensagem) ?>
             </p>
             <?php endif; ?>
+
             <input type="submit" value="Entrar">
             <p class="mensagemCadLog">Não possui conta? <a href='cadastro.php'>Cadastre-se aqui</a></p>
         </form>
