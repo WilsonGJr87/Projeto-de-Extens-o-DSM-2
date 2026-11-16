@@ -10,6 +10,9 @@ $resultado = $conexao->query($sql);
 function e($valor) {
     return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
 }
+
+$opt = "comprar";
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +71,7 @@ function e($valor) {
         <!-- Pesquisa de imóveis -->
         <section class="buscar-container">
 
-            <form class="card-form-pesquisar" action="#" method="GET">
+            <form class="card-form-pesquisar" action="pesquisar.php?finalidade=<?php echo $opt; ?>" method="POST">
 
                 <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
 
@@ -153,4 +156,20 @@ function e($valor) {
     <?php mostrar_footer(); ?>
 
 </body>
+    <script>
+        const comprarOpt = document.getElementById("comprarOPT");
+        const alugarOpt = document.getElementById("alugarOPT");
+
+        comprarOpt.addEventListener("click", () => {
+            comprarOpt.classList.add("ativo");
+            alugarOPT.classList.remove("ativo");
+            <?php $opt = "comprar"; ?>
+        });
+        alugarOpt.addEventListener("click", () => {
+            alugarOpt.classList.add("ativo");
+            comprarOpt.classList.remove("ativo");
+            <?php $opt = "alugar"; ?>
+        });
+        
+    </script>
 </html>
