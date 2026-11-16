@@ -2,6 +2,7 @@
 session_start();
 
 require_once "conexao.php";
+require_once "criador_de_template.php";
 
 $sql = "SELECT * FROM imovel LIMIT 10";
 $resultado = $conexao->query($sql);
@@ -31,31 +32,14 @@ function e($valor) {
 
 <body>
 
-    <header>
-        <img src="Imagens/logo-topo.png" alt="Premium Imóveis">
-
-        <nav>
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
-            <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
-            <a href="#">Ajuda</a>
-        </nav>
-    </header>
+    <?php mostrar_header(); ?>
 
     <main>
 
         <!-- Modal de contato -->
         <form id="contatoDiv" class="contato-modal" action="#" method="POST">
 
-            <button
-                type="button"
-                class="fechar-btn"
-                onclick="fecharcontato()"
-                aria-label="Fechar formulário"
-            >
-                X
-            </button>
+            <button type="button" class="fechar-btn" onclick="fecharcontato()" aria-label="Fechar formulário">X</button>
 
             <div class="campo">
                 <label for="modal-nome">Nome</label>
@@ -89,22 +73,12 @@ function e($valor) {
                 <h2>Milhões de opções e facilidades pra achar a casa ideal pra sua vida.</h2>
 
                 <div class="botoes">
-                    <button type="button" id="comprarOPT" class="seletor ativo">
-                        Comprar
-                    </button>
-
-                    <button type="button" id="alugarOPT" class="seletor">
-                        Alugar
-                    </button>
+                    <button type="button" id="comprarOPT" class="seletor ativo">Comprar</button>
+                    <button type="button" id="alugarOPT" class="seletor">Alugar</button>
                 </div>
 
                 <label for="localizacao">Onde deseja morar?</label>
-                <input
-                    class="texto"
-                    type="search"
-                    id="localizacao"
-                    name="localizacao"
-                >
+                <input class="texto" type="search" id="localizacao" name="localizacao">
 
                 <label for="tipo-imovel">Tipo de imóvel</label>
                 <select class="texto" id="tipo-imovel" name="tipo">
@@ -132,92 +106,39 @@ function e($valor) {
 
                     <?php
                     $lista = [
-                        [
-                            "info" => $imovel['qt_area_total_imovel'],
-                            "title" => "área total",
-                            "icon" => "svg/tamanho.svg",
-                            "unidade" => " m²"
-                        ],
-                        [
-                            "info" => $imovel['qt_quarto_imovel'],
-                            "title" => "quartos",
-                            "icon" => "svg/cama.svg",
-                            "unidade" => ""
-                        ],
-                        [
-                            "info" => $imovel['qt_banheiro_imovel'],
-                            "title" => "banheiros",
-                            "icon" => "svg/toilet.svg",
-                            "unidade" => ""
-                        ],
-                        [
-                            "info" => $imovel['qt_vaga_imovel'],
-                            "title" => "vagas",
-                            "icon" => "svg/vaga.svg",
-                            "unidade" => ""
-                        ]
+                        ["info" => $imovel['qt_area_total_imovel'], "title" => "área total", "icon" => "svg/tamanho.svg", "unidade" => " m²"],
+                        ["info" => $imovel['qt_quarto_imovel'], "title" => "quartos", "icon" => "svg/cama.svg", "unidade" => ""],
+                        ["info" => $imovel['qt_banheiro_imovel'], "title" => "banheiros", "icon" => "svg/toilet.svg", "unidade" => ""],
+                        ["info" => $imovel['qt_vaga_imovel'], "title" => "vagas", "icon" => "svg/vaga.svg", "unidade" => ""]
                     ];
                     ?>
 
-                    <form
-                        class="card-produto"
-                        action="imovel.php"
-                        method="GET"
-                        onclick="verimovel(this)"
-                    >
+                    <form class="card-produto" action="imovel.php" method="GET" onclick="verimovel(this)">
 
-                        <input
-                            type="hidden"
-                            name="id"
-                            value="<?= e($imovel['id_imovel']) ?>"
-                        >
+                        <input type="hidden" name="id" value="<?= e($imovel['id_imovel']) ?>">
 
-                        <img
-                            class="card-image"
-                            src="Imagens/imagem-teste.png"
-                            alt="Imagem do imóvel"
-                        >
+                        <img class="card-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
 
                         <label><?= e($imovel['nm_tipo_imovel']) ?></label>
 
-                        <label class="preco-texto">
-                            R$ <?= e($imovel['vl_preco']) ?>
-                        </label>
+                        <label class="preco-texto">R$ <?= e($imovel['vl_preco']) ?></label>
 
-                        <label>
-                            <?= e($imovel['nm_logradouro']) ?>
-                            |
-                            <?= e($imovel['nm_bairro_imovel']) ?>
-                        </label>
+                        <label><?= e($imovel['nm_logradouro']) ?> | <?= e($imovel['nm_bairro_imovel']) ?></label>
 
                         <div class="info-prod">
 
                             <?php foreach ($lista as $info): ?>
 
                                 <div class="info">
-
-                                    <img
-                                        src="<?= e($info['icon']) ?>"
-                                        class="prod-icon"
-                                        alt=""
-                                    >
-
-                                    <label>
-                                        <?= e($info['info']) . e($info['unidade']) ?>
-                                    </label>
-
+                                    <img src="<?= e($info['icon']) ?>" class="prod-icon" alt="">
+                                    <label><?= e($info['info']) . e($info['unidade']) ?></label>
                                 </div>
 
                             <?php endforeach; ?>
 
                         </div>
 
-                        <button
-                            type="button"
-                            onclick="event.stopPropagation(); abrircontato()"
-                        >
-                            Contatar
-                        </button>
+                        <button type="button" onclick="event.stopPropagation(); abrircontato()">Contatar</button>
 
                     </form>
 
@@ -229,72 +150,7 @@ function e($valor) {
 
     </main>
 
-    <footer class="rodape">
-
-        <div class="superior">
-
-            <img src="Imagens/logo-rodape.png" alt="Premium Imóveis">
-
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
-            <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
-            <a href="#">Ajuda</a>
-
-        </div>
-
-        <section class="inferior">
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-
-                <div class="whatsapp">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-        </section>
-
-        <div class="copyright">
-            <p>© Copyright 2026 Premium Imóveis -</p>
-        </div>
-
-    </footer>
+    <?php mostrar_footer(); ?>
 
 </body>
 </html>

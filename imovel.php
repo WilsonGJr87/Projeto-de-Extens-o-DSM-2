@@ -2,6 +2,7 @@
 session_start();
 
 require_once "conexao.php";
+require_once "criador_de_template.php";
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -31,30 +32,10 @@ $resultado2 = $stmt2;
 
 // Características do imóvel
 $lista = [
-    [
-        "info" => $imovel['qt_area_total_imovel'],
-        "title" => "área total",
-        "icon" => "svg/tamanho.svg",
-        "unidade" => " m²"
-    ],
-    [
-        "info" => $imovel['qt_quarto_imovel'],
-        "title" => "quartos",
-        "icon" => "svg/cama.svg",
-        "unidade" => ""
-    ],
-    [
-        "info" => $imovel['qt_banheiro_imovel'],
-        "title" => "banheiros",
-        "icon" => "svg/toilet.svg",
-        "unidade" => ""
-    ],
-    [
-        "info" => $imovel['qt_vaga_imovel'],
-        "title" => "vagas",
-        "icon" => "svg/vaga.svg",
-        "unidade" => ""
-    ]
+    ["info" => $imovel['qt_area_total_imovel'], "title" => "área total", "icon" => "svg/tamanho.svg", "unidade" => " m²"],
+    ["info" => $imovel['qt_quarto_imovel'], "title" => "quartos", "icon" => "svg/cama.svg", "unidade" => ""],
+    ["info" => $imovel['qt_banheiro_imovel'], "title" => "banheiros", "icon" => "svg/toilet.svg", "unidade" => ""],
+    ["info" => $imovel['qt_vaga_imovel'], "title" => "vagas", "icon" => "svg/vaga.svg", "unidade" => ""]
 ];
 
 // Dados do imóvel
@@ -101,37 +82,16 @@ function e($valor) {
 
 <body>
 
-    <header>
-        <img src="Imagens/logo-topo.png" alt="Premium Imóveis">
-
-        <nav>
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
-            <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
-            <a href="#">Ajuda</a>
-        </nav>
-    </header>
+    <?php mostrar_header("Imagens/logo-topo.png"); ?>
 
     <main>
 
         <!-- Modal de contato -->
         <form id="contatoDiv" class="contato-modal" action="#" method="POST">
 
-            <button
-                type="button"
-                class="fechar-btn"
-                onclick="fecharcontato()"
-                aria-label="Fechar formulário"
-            >
-                X
-            </button>
+            <button type="button" class="fechar-btn" onclick="fecharcontato()" aria-label="Fechar formulário">X</button>
 
-            <input
-                type="hidden"
-                name="id_imovel"
-                value="<?= e($imovel['id_imovel']) ?>"
-            >
+            <input type="hidden" name="id_imovel" value="<?= e($imovel['id_imovel']) ?>">
 
             <div class="campo">
                 <label for="modal-nome">Nome</label>
@@ -166,15 +126,9 @@ function e($valor) {
 
                 <hr>
 
-                <h3>
-                    <?= e($bairro . ' - ' . $cidade . ', ' . $estado) ?>
-                </h3>
+                <h3><?= e($bairro . ' - ' . $cidade . ', ' . $estado) ?></h3>
 
-                <img
-                    class="imovel-image"
-                    src="Imagens/imagem-teste.png"
-                    alt="Imagem do imóvel"
-                >
+                <img class="imovel-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
 
                 <h3>Descrição</h3>
 
@@ -191,17 +145,8 @@ function e($valor) {
                             <p><?= e($categoria['title']) ?></p>
 
                             <div class="detalhe">
-
-                                <img
-                                    src="<?= e($categoria['icon']) ?>"
-                                    class="detalhe-icon"
-                                    alt=""
-                                >
-
-                                <label>
-                                    <?= e($categoria['info']) . e($categoria['unidade']) ?>
-                                </label>
-
+                                <img src="<?= e($categoria['icon']) ?>" class="detalhe-icon" alt="">
+                                <label><?= e($categoria['info']) . e($categoria['unidade']) ?></label>
                             </div>
 
                         </div>
@@ -210,26 +155,18 @@ function e($valor) {
 
                 </div>
 
-                <a href="<?= e($link) ?>" target="_blank" rel="noopener noreferrer">
-                    Ver localização
-                </a>
+                <a href="<?= e($link) ?>" target="_blank" rel="noopener noreferrer">Ver localização</a>
 
             </article>
 
             <!-- Formulário lateral -->
             <form class="contato-sidebar" action="#" method="POST">
 
-                <h2 id="contato-hr">
-                    Valor de venda: R$ <?= e($preco) ?>
-                </h2>
+                <h2 id="contato-hr">Valor de venda: R$ <?= e($preco) ?></h2>
 
                 <h3>Tenho interesse nesse imóvel</h3>
 
-                <input
-                    type="hidden"
-                    name="id_imovel"
-                    value="<?= e($imovel['id_imovel']) ?>"
-                >
+                <input type="hidden" name="id_imovel" value="<?= e($imovel['id_imovel']) ?>">
 
                 <div class="campo">
                     <label for="sidebar-nome">Nome</label>
@@ -270,92 +207,39 @@ function e($valor) {
 
                     <?php
                     $listaRecomendacao = [
-                        [
-                            "info" => $recomendacao['qt_area_total_imovel'],
-                            "title" => "área total",
-                            "icon" => "svg/tamanho.svg",
-                            "unidade" => " m²"
-                        ],
-                        [
-                            "info" => $recomendacao['qt_quarto_imovel'],
-                            "title" => "quartos",
-                            "icon" => "svg/cama.svg",
-                            "unidade" => ""
-                        ],
-                        [
-                            "info" => $recomendacao['qt_banheiro_imovel'],
-                            "title" => "banheiros",
-                            "icon" => "svg/toilet.svg",
-                            "unidade" => ""
-                        ],
-                        [
-                            "info" => $recomendacao['qt_vaga_imovel'],
-                            "title" => "vagas",
-                            "icon" => "svg/vaga.svg",
-                            "unidade" => ""
-                        ]
+                        ["info" => $recomendacao['qt_area_total_imovel'], "title" => "área total", "icon" => "svg/tamanho.svg", "unidade" => " m²"],
+                        ["info" => $recomendacao['qt_quarto_imovel'], "title" => "quartos", "icon" => "svg/cama.svg", "unidade" => ""],
+                        ["info" => $recomendacao['qt_banheiro_imovel'], "title" => "banheiros", "icon" => "svg/toilet.svg", "unidade" => ""],
+                        ["info" => $recomendacao['qt_vaga_imovel'], "title" => "vagas", "icon" => "svg/vaga.svg", "unidade" => ""]
                     ];
                     ?>
 
-                    <form
-                        class="card-produto"
-                        action="imovel.php"
-                        method="GET"
-                        onclick="verimovel(this)"
-                    >
+                    <form class="card-produto" action="imovel.php" method="GET" onclick="verimovel(this)">
 
-                        <input
-                            type="hidden"
-                            name="id"
-                            value="<?= e($recomendacao['id_imovel']) ?>"
-                        >
+                        <input type="hidden" name="id" value="<?= e($recomendacao['id_imovel']) ?>">
 
-                        <img
-                            class="card-image"
-                            src="Imagens/imagem-teste.png"
-                            alt="Imagem do imóvel"
-                        >
+                        <img class="card-image" src="Imagens/imagem-teste.png" alt="Imagem do imóvel">
 
                         <label><?= e($recomendacao['nm_tipo_imovel']) ?></label>
 
-                        <label class="preco-texto">
-                            R$ <?= e($recomendacao['vl_preco']) ?>
-                        </label>
+                        <label class="preco-texto">R$ <?= e($recomendacao['vl_preco']) ?></label>
 
-                        <label>
-                            <?= e($recomendacao['nm_logradouro']) ?>
-                            |
-                            <?= e($recomendacao['nm_bairro_imovel']) ?>
-                        </label>
+                        <label><?= e($recomendacao['nm_logradouro']) ?> | <?= e($recomendacao['nm_bairro_imovel']) ?></label>
 
                         <div class="info-prod">
 
                             <?php foreach ($listaRecomendacao as $info): ?>
 
                                 <div class="info">
-
-                                    <img
-                                        src="<?= e($info['icon']) ?>"
-                                        class="prod-icon"
-                                        alt=""
-                                    >
-
-                                    <label>
-                                        <?= e($info['info']) . e($info['unidade']) ?>
-                                    </label>
-
+                                    <img src="<?= e($info['icon']) ?>" class="prod-icon" alt="">
+                                    <label><?= e($info['info']) . e($info['unidade']) ?></label>
                                 </div>
 
                             <?php endforeach; ?>
 
                         </div>
 
-                        <button
-                            type="button"
-                            onclick="event.stopPropagation(); abrircontato()"
-                        >
-                            Contatar
-                        </button>
+                        <button type="button" onclick="event.stopPropagation(); abrircontato()">Contatar</button>
 
                     </form>
 
@@ -367,72 +251,7 @@ function e($valor) {
 
     </main>
 
-    <footer class="rodape">
-
-        <div class="superior">
-
-            <img src="Imagens/logo-rodape.png" alt="Premium Imóveis">
-
-            <a href="#">Comprar</a>
-            <a href="#">Alugar</a>
-            <a href="#">Vender</a>
-            <a href="#">Descobrir</a>
-            <a href="#">Ajuda</a>
-
-        </div>
-
-        <section class="inferior">
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                    <p>Plantão de Vendas - R. Sete de Setembro, 1560</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="localizacao">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-
-                <div class="telefone">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-
-                <div class="whatsapp">
-                    <p>Blumenau/SC (CRECI: 2962-J)</p>
-                    <p>R. Eng. Rodolfo Ferraz, 255</p>
-                </div>
-            </div>
-
-        </section>
-
-        <div class="copyright">
-            <p>© Copyright 2026 Premium Imóveis -</p>
-        </div>
-
-    </footer>
+    <?php mostrar_footer("Imagens/logo-rodape.png"); ?>
 
 </body>
 </html>
