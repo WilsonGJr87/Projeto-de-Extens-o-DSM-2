@@ -1,3 +1,7 @@
+:root {
+    --texto-suave: #5c5a52;
+}
+
 main {
     width: 100%;
     max-width: 960px;
@@ -5,7 +9,7 @@ main {
     margin: 0 auto;
     padding: 2rem 1rem;
 
-    color: var(--cor-secundaria);
+    color: var(--texto-primaria);
 }
 
 h1 {
@@ -25,13 +29,14 @@ h2 {
 .buscar-container > p {
     margin: .5rem 0 1.5rem;
 
-    color: var(--texto-secundaria);
+    color: var(--texto-suave);
 }
 
 .card-form-pesquisar {
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-primaria);
 
     border-radius: 10px;
+    border-bottom: 2px solid var(--cor-terciaria);
 
     max-width: 640px;
 
@@ -48,9 +53,11 @@ h2 {
     padding-left: 11px;
     font-size: medium;
     border-radius: 16px;
-    border: none;
-    border: 1px solid #000;
+    border: 1px solid var(--cor-terciaria);
     outline: none;
+
+    background-color: var(--cor-secundaria);
+    color: var(--texto-primaria);
 }
 
 .texto:hover,
@@ -72,8 +79,8 @@ h2 {
 
     min-height: 3.5rem;
 
-    background-color: var(--cor-secundaria);
-    color: var(--texto-primaria);
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
 
     border-radius: 10px;
     border-bottom: 2px solid var(--cor-terciaria);
@@ -90,6 +97,7 @@ h2 {
 
 .card-categoria:hover {
     border-bottom-color: var(--cor-hover-botao-1);
+    color: var(--texto-terciaria);
 
     transform: translateY(-2px);
 }
@@ -110,25 +118,25 @@ h2 {
 }
 
 .container-faq > details > summary:hover {
-    color: var(--cor-hover-botao-1);
+    color: var(--texto-terciaria-hover);
 }
 
 .container-faq > details > p {
     margin-top: .75rem;
 
-    color: var(--texto-secundaria);
+    color: var(--texto-suave);
 }
 
 .faq-status {
     margin-top: 1rem;
 
     text-align: center;
-    color: var(--texto-secundaria);
+    color: var(--texto-suave);
 }
 
 .card-whatsapp {
-    background-color: var(--cor-secundaria);
-    color: var(--texto-primaria);
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
 
     border-radius: 10px;
     border-bottom: 2px solid var(--cor-terciaria);
@@ -147,6 +155,8 @@ h2 {
 
 .card-whatsapp > p {
     margin-bottom: 1rem;
+
+    color: var(--texto-secundaria);
 }
 
 .botao-whatsapp {
@@ -173,7 +183,7 @@ h2 {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-    outline: 2px solid var(--cor-botao-1);
+    outline: 2px solid var(--cor-terciaria);
     outline-offset: 3px;
 }
 
