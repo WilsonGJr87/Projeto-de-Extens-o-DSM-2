@@ -1,397 +1,148 @@
+/* Pesquisa de imóveis */
+
 .buscar-container {
     display: flex;
-
     justify-content: flex-start;
     align-items: center;
 
-    background-image: url("Imagens/49-viva-em-bc.png");
-    /* background-color: var(--cor-primaria); */
-
     width: 100%;
-    height: 400px;
+    min-height: 400px;
 
-    gap: 1%;
+    background-image: url("Imagens/49-viva-em-bc.png");
+    background-position: center;
+    background-size: cover;
 
     border-bottom: 2px solid var(--cor-terciaria);
 }
 
 .card-form-pesquisar {
     display: flex;
-
     flex-direction: column;
-
-    background-color: var(--cor-secundaria);
-
-    border-radius: 10px;
+    gap: 12px;
 
     width: 30%;
-    height: 95%;
-
-    padding: 2%;
-    gap: 2%;
-
+    min-height: 95%;
     margin: 5%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; 
-}
-.card-pesquisar {
-
-    background-color: var(--cor-secundaria);
-
-    border-radius: 10px;
-
-    width: 30%;
-    height: 95%;
-}
-
-.card-form-pesquisar > nav {
-    display: flex;
-    
-    justify-content: space-between;
-
-    width: 100%;
-}
-
-h1,h3 {
-    /* width: 100%; */
-    text-align: center;
-
-    background-color: var(--cor-secundaria);
-    color: var(--texto-primaria);
-}
-
-h1 {
-    justify-self: center;
-    padding: 2% 0;
-
-    border-bottom: solid 3px var(--texto-primaria);
-}
-
-h3 {
-    text-align: start;
-}
-
-h2 {
-    font-size:large;
-    padding-bottom: 16px;
-}
-
-.container-produtos {
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    background-color: var(--cor-secundaria);
-
-    width: 100%;
-
     padding: 2%;
-    /* gap: 5%; */
-    
-}
-
-.carrossel-produtos {
-    display: flex;
-
-    flex-direction: row;
-
-    justify-content: flex-start;
-    flex-wrap: wrap;
 
     background-color: var(--cor-secundaria);
-
-    width: 100%;
-
-    gap: 5%;
-    
-}
-
-.card-produto {
-    display: flex;
-    
-    flex-direction: column;
-
-    background-color: var(--cor-secundaria); /*var(--cor-primaria);*/
-
-    width: 285px;
-    height: 285px;
-
     border-radius: 10px;
-    
-    padding: 5px 0;
 
-    border-bottom: 2px solid var(--cor-terciaria);
-    transition: all linear .2s;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0 0 5px 0,
+        rgba(0, 0, 0, 0.1) 0 0 1px 0;
 }
 
-.card-produto button {
+.card-form-pesquisar h2 {
+    margin: 0;
+}
+
+/* Alternância entre comprar e alugar */
+
+.botoes {
     display: flex;
-
-    align-self: center;
-
-    width: 95%;
-    height: 35px;
-    justify-content: center;
-    align-items: center;
-
-    border: none;
-    outline: none;
-    background-color: var(--cor-botao-1);
-
-    color: white;
-
-    cursor: pointer;
-
-    transition: .2s linear;
-    border-radius: 20px;
-}
-
-.card-produto button:hover{
-    background-color: var(--cor-hover-botao-1);/*rgb(106, 33, 174)*/
-}
-
-.card-image {
-    display: flex;
-    width: 100%;
-    height: 50%;
-
-    align-items: start;
-
-    border-radius: 10px;
-}
-
-.preco-texto {
-    font-size: larger;
-    font-weight: bold;
-}
-
-.info-prod {
-    display: flex;
-
-    flex-direction: row;
-
     justify-content: space-between;
-    align-items: center;
-
-    flex: 1;
 
     width: 100%;
 }
 
-.prod-icon {
+.seletor {
+    padding: 8px 30px;
 
-    display: flex;
-
-    width: 20px;
-    height: 20px;
-}
-
-.card-produto:hover {
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.card-produto *:hover {
-    cursor: pointer;
-}
-
-.info {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: row;
-    
-    gap: 5%;
-}
-
-.seletor{
     background-color: var(--cor-secundaria);
     color: black;
 
-    padding: 8px;
     font-size: 14px;
-    padding-right: 30px;
-    padding-left: 30px;
-    font-weight:600;
+    font-weight: 600;
 
     border: none;
-    
     cursor: pointer;
+    transition: 0.2s linear;
 }
 
-.seletor:hover{
-    color: var(--cor-hover-botao-1);/*darkmagenta*/
-    border-bottom: 2px solid var(--cor-hover-botao-1);/*darkmagenta */
-    transition: .2s linear;
+.seletor:hover {
+    color: var(--cor-hover-botao-1);
+    border-bottom: 2px solid var(--cor-hover-botao-1);
 }
 
 .seletor.ativo {
     border-bottom: 2px solid #000;
 }
 
-.buscar-container label{
-    padding-top: 15px;
+/* Campos da pesquisa */
+
+.card-form-pesquisar label {
+    padding-top: 8px;
 }
 
-.texto{
-    padding: 8px;
-    padding-left: 11px;
+.texto {
+    padding: 8px 8px 8px 11px;
+
     font-size: medium;
-    border-radius: 16px;
-    border: none;
+
     border: 1px solid #000;
+    border-radius: 16px;
     outline: none;
+
+    transition: 0.2s linear;
 }
 
-.texto:hover{
-    transition: .2s linear;
-    border: 1px solid var(--cor-hover-botao-1);/*purple*/
+.texto:hover,
+.texto:focus {
+    border-color: var(--cor-hover-botao-1);
 }
 
-select.texto{
-    padding-left: 20px;
+select.texto {
     appearance: none;
+
     padding: 8px 35px 8px 8px;
+
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
     background-repeat: no-repeat;
     background-position: right 12px center;
 }
 
-.buscar{
+/* Botão de pesquisa */
+
+.buscar {
     padding: 8px;
 
-    font-size: large;
-    border-radius: 16px;
-    border: none;
-    outline: none;
-    background-color: var(--cor-botao-1); /*blueviolet*/
-    font-weight:500;
-
+    background-color: var(--cor-botao-1);
     color: white;
 
-    cursor: pointer;
-
-    transition: .2s linear;
-}
-
-.buscar:hover{
-    background-color: var(--cor-hover-botao-1);/*rgb(106, 33, 174)*/
-}
-
-hr {
-    width: 100%;
-
-    background-color: var(--cor-terciaria);
-
-    padding: .1%;
-}
-
-.contato-container {
-
-    position: fixed;
-    display: none;
-    flex-direction: column;
-
-    justify-content: space-around;
-    align-items: center;
-
-    width: 30%;
-    height: 60%;
-
-    background-color: var(--cor-secundaria);
-
-    border: 2px solid var(--cor-terciaria);
-    transition: all linear .2s;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-    z-index: 1000;
-}
-
-.contato-container.active {
-    display: flex;
-}
-
-.campo {
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    width: 80%;
-}
-
-textarea {
-    resize: none;
-}
-
-input, textarea {
+    font-size: large;
+    font-weight: 500;
 
     border: none;
+    border-radius: 16px;
+    outline: none;
 
-    border-bottom: 2px solid var(--cor-terciaria);
-}
-
-input {
-    width: 100%;
-    height: 35px;
-}
-
-textarea {
-    width: 100%;
-    height: 125px;
-
-    padding: 1%;
-}
-
-h2 {
-    color: var(--cor-terciaria);
-}
-
-#contato-hr {
-    border-bottom: 2px solid var(--cor-terciaria);
-}
-
-.imovel-container a {
-    text-decoration: none;
-
-    font-weight: bold;
-
-    color: var(--texto-terciaria);
-
-    margin: 1%;
-
-}
-
-.imovel-container a:hover {
-    text-decoration: underline;
-    color: var(--texto-terciaria-hover);
-}
-
-.fechar-btn {
-
-    align-self: flex-end;
-    font-size: larger;
-
-    text-align: center;
-
-    width: 5%;
-    height: 5%;
-
-    border-radius: 10px;
-
-    transition: linear .1s;
-}
-
-.fechar-btn:hover {
     cursor: pointer;
+    transition: 0.2s linear;
+}
 
-    background-color: rgb(170, 192, 192);
+.buscar:hover {
+    background-color: var(--cor-hover-botao-1);
+}
+
+/* Responsividade */
+
+@media (max-width: 900px) {
+    .card-form-pesquisar {
+        width: 50%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 600px) {
+    .buscar-container {
+        justify-content: center;
+    }
+
+    .card-form-pesquisar {
+        width: 85%;
+        margin: 5% 0;
+        padding: 5%;
+    }
 }
