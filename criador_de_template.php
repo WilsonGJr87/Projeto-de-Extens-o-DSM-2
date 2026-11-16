@@ -3,8 +3,8 @@
 function mostrar_header() {
 ?>
     <header>
-        <img src="Imagens/logo.png" alt="Premium Imóveis">
-
+        <img id="logo" onclick="window.location.href = 'index.php'" src="Imagens/logo.png" alt="Premium Imóveis">
+        
         <nav>
             <a href="pesquisa.php?finalidade=comprar">Comprar</a>
             <a href="pesquisa.php?finalidade=alugar">Alugar</a>

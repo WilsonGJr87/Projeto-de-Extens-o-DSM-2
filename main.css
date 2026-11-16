@@ -178,3 +178,7 @@ nav a:hover, .superior a:hover {
 .telefone::before {
     background-image: url("svg/phone.svg");
 }
+
+#logo:hover {
+    cursor: pointer;
+}
